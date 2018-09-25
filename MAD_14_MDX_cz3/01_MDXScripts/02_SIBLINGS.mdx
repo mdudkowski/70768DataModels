@@ -1,0 +1,45 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	Siblings
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the siblings of a specified member, including the member itself.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT 
+		[Measures].[Internet Sales Amount]										ON 0,
+		[Product].[Product Categories].[Subcategory].[Socks].PARENT.CHILDREN	ON 1
+	FROM [Adventure Works]		
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]								ON 0,
+		[Product].[Product Categories].[Subcategory].[Socks].SIBLINGS	ON 1
+	FROM [Adventure Works]		
+	;
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	FirstSibling
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the first child of the parent of a member.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT 
+		[Measures].[Internet Sales Amount]									ON 0,
+		[Product].[Product Categories].[Subcategory].[Socks].FIRSTSIBLING	ON 1
+	FROM [Adventure Works]		
+	;
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	LastSibling
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the last child of the parent of a specified member.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT 
+		[Measures].[Internet Sales Amount]									ON 0,
+		[Product].[Product Categories].[Subcategory].[Socks].LASTSIBLING	ON 1
+	FROM [Adventure Works]		
+	;

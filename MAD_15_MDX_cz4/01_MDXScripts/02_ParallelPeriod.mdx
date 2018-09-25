@@ -1,0 +1,83 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	ParallelPeriod
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns a member from a prior period in the same relative position as a specified member.
+
+--	Although similar to the Cousin function, the ParallelPeriod function is more closely related to time series. 
+--	The ParallelPeriod function takes the ancestor of the specified member at the specified level, 
+--	finds the ancestor's sibling with the specified lag, 
+--	and finally returns the parallel period of the specified member among the descendants of the sibling.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT
+	[Measures].[Reseller Sales Amount] on 0,
+	ParallelPeriod(	[Date].[Calendar].[Calendar Year],
+	1,
+	[Date].[Calendar].[May 2012]) on 1
+	FROM [Adventure Works]
+	; 
+
+	SELECT
+	[Measures].[Reseller Sales Amount] on 0,
+	ParallelPeriod(	[Date].[Calendar].[Calendar Year],
+	-1,
+	[Date].[Calendar].[May 2012]) on 1
+	FROM [Adventure Works]
+	; 
+
+	SELECT
+	[Measures].[Reseller Sales Amount] on 0,
+	ParallelPeriod(	[Date].[Calendar].[Calendar Semester],
+	1,
+	[Date].[Calendar].[May 2012]) on 1
+	FROM [Adventure Works]
+	; 
+
+	SELECT
+	[Measures].[Reseller Sales Amount] on 0,
+	ParallelPeriod(	[Date].[Calendar].[Calendar Quarter],
+	1,
+	[Date].[Calendar].[May 2012]) on 1
+	FROM [Adventure Works]
+	; 
+
+	SELECT
+	[Measures].[Reseller Sales Amount] on 0,
+	ParallelPeriod(	[Date].[Calendar].[Calendar Year],
+	1,
+	[Date].[Calendar].[February 29, 2008]) on 1
+	FROM [Adventure Works]
+	; 
+
+
+	SELECT
+	[Measures].[Reseller Sales Amount] on 0,
+	ParallelPeriod(	[Geography].[Geography].[Country],
+	1,
+	[Geography].[Geography].[City].[Augsburg]) on 1
+	FROM [Adventure Works]
+	; 
+
+
+	SELECT Cousin 
+	(	[Date].[Calendar].[May 2012],
+		[Date].[Calendar].[CY 2011]
+	) ON 0
+	FROM [Adventure Works]
+	;
+
+	WITH MEMBER [Measures].[Last Year] 
+	AS
+	(ParallelPeriod(	[Date].[Calendar].[Calendar Year],
+						1,
+						[Date].[Calendar].Currentmember
+						),
+	[Measures].[Reseller Sales Amount]),
+	format_string = "Currency"  
+	SELECT
+		{ [Measures].[Reseller Sales Amount],	[Measures].[Last Year] } on 0,
+	[Date].[Calendar].[Month].MEMBERS on 1
+	FROM [Adventure Works]
+	;

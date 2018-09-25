@@ -1,0 +1,58 @@
+--------------------------------------------------------------------------------------------------------------------------------
+--	ROOT
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns a tuple that consists of the All members from each attribute hierarchy within 
+--	the current scope in a cube, dimension, or tuple.
+
+--	If neither a dimension name nor a tuple expression is specified, the Root function returns a tuple that contains
+--	the All member (or the default member if the All member does not exist) from each attribute hierarchy in the cube. 
+--	The order of members in the tuple is based on the sequence in which the attribute hierarchies are defined within the cube.
+
+--	If a dimension name is specified, the Root function returns a tuple that contains 
+--	the All member (or the default member if the All member does not exist) from each attribute hierarchy in the specified dimension 
+--	based on the context of the current member. 
+--	The order of members in the tuple is based on the sequence in which the attribute hierarchies are defined within the dimension.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT 
+		{	[Measures].[Amount]
+			} ON 0,
+		[Date].[Calendar Year].&[2010]:[Date].[Calendar Year].&[2013] ON 1
+	FROM [Adventure Works]
+	;
+	
+	SELECT 
+		{	[Measures].[Amount]
+			} ON 0,
+		[Date].[Calendar Year].&[2010]:[Date].[Calendar Year].&[2013] ON 1
+	FROM [Adventure Works]
+	WHERE [Account].[Account Type].&[Revenue]
+	;
+
+	WITH MEMBER [Measures].[RootAmount]
+	AS	(	Root([Account]),	
+			[Measures].[Amount]
+			),
+	FORMAT_STRING = "Currency"
+	SELECT 
+		{	[Measures].[Amount],
+			[Measures].[RootAmount]
+			} ON 0,
+		[Date].[Calendar Year].&[2010]:[Date].[Calendar Year].&[2013] ON 1
+	FROM [Adventure Works]
+	WHERE [Account].[Account Type].&[Revenue]
+	;
+
+	WITH MEMBER [Measures].[RootAmount]
+	AS	(	Root([Account]),	
+			[Measures].[Amount]
+			),
+	FORMAT_STRING = "Currency"
+	SELECT 
+		{	[Measures].[Amount],
+			[Measures].[RootAmount]
+			} ON 0,
+		NON EMPTY [Account].[Account Type].[Account Type].MEMBERS ON 1
+	FROM [Adventure Works]
+	;

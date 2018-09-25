@@ -1,0 +1,25 @@
+--------------------------------------------------------------------------------------------------------------------------------
+--	SET
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	collection of tuples
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		{
+			( [Geography].[Country].[Australia]		, [Geography].[City].[Melbourne])
+		,	( [Geography].[Country].[France]		, [Geography].[City].[Paris])
+		} ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		{
+				(	[Geography].[Country].[Australia],	[Product].[Product Categories].[Category].[Bikes],	[Date].[Calendar].[Calendar Year].&[2011])	
+			,	(	[Geography].[Country].[Australia],	[Product].[Product Categories].[Category].[Bikes],	[Date].[Calendar].[Calendar Year].&[2012])
+			,	(	[Geography].[Country].[Australia],	[Product].[Product Categories].[Category].[Bikes],	[Date].[Calendar].[Calendar Year].&[2013])
+		}	ON 1
+	FROM [Adventure Works]
+	;

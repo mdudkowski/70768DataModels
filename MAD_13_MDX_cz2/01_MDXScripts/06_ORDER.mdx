@@ -1,0 +1,127 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	ORDER
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Arranges members of a specified set, optionally preserving or breaking the hierarchy.
+--	The Order function can either be 
+	--	hierarchical (as specified by using the ASC or DESC flag) or 
+	--	nonhierarchical (as specified by using the BASC or BDESC flag; the B stands for "break hierarchy").
+--	If ASC or DESC is specified, the Order function first arranges the members according to their position in the hierarchy, 
+--	and then orders each level. 
+--	If BASC or BDESC is specified, the Order function arranges members in the set without regard to the hierarchy. 
+--	In no flag is specified, ASC is the default.
+--------------------------------------------------------------------------------------------------------------------------------
+
+		SELECT
+			{	[Measures].[Internet Sales Amount], 
+				[Measures].[Reseller Sales Amount]
+				} ON 0,
+			ORDER(		[Product].[Subcategory].[Subcategory].MEMBERS
+					,	(	[Measures].[Internet Sales Amount],
+							[Date].[Calendar Year].[CY 2012]	-- to jest opcjonalne, do ORDER jest brany WHERE
+							) 
+					,	DESC
+					) ON 1
+		FROM [Adventure Works]
+		WHERE (	[Date].[Calendar Year].[CY 2012])
+		;    
+
+ 	--------------------------------------------------------------
+
+		SELECT
+			{	[Measures].[Internet Sales Amount], 
+				[Measures].[Reseller Sales Amount]
+				} ON 0,
+			ORDER(		[Product].[Subcategory].[Subcategory].MEMBERS
+					,	(	[Measures].[Internet Sales Amount]
+							) 
+					,	DESC
+					) ON 1
+		FROM [Adventure Works]
+		WHERE (	[Date].[Calendar Year].[CY 2012])
+		;    
+
+ 	--------------------------------------------------------------
+
+		SELECT
+			{	[Measures].[Internet Sales Amount], 
+				[Measures].[Reseller Sales Amount]
+				} ON 0,
+			ORDER(		[Product].[Subcategory].[Subcategory].ALLMEMBERS
+					,	(	[Measures].[Internet Sales Amount],
+							[Date].[Calendar Year].[CY 2012]
+							) 
+					,	DESC
+					) ON 1
+		FROM [Adventure Works]
+		;    
+
+ 	--------------------------------------------------------------
+
+		SELECT
+			NON EMPTY
+			{	[Measures].[Internet Sales Amount], 
+				[Measures].[Reseller Sales Amount]
+				} 
+				* [Date].[Calendar Year].[Calendar Year].MEMBERS ON 0,
+			NON EMPTY
+			ORDER(		[Product].[Subcategory].[Subcategory].ALLMEMBERS
+					,	(	[Measures].[Internet Sales Amount],
+							[Date].[Calendar Year].[CY 2012]
+							) 
+					,	DESC
+					) ON 1
+		FROM [Adventure Works]
+		;        
+
+	--	rok 2012 sortowany rokiem 2011
+ 	--------------------------------------------------------------
+
+		SELECT
+			{	[Measures].[Internet Sales Amount], 
+				[Measures].[Reseller Sales Amount]
+				} ON 0,
+			ORDER(		[Product].[Subcategory].[Subcategory].ALLMEMBERS
+					,	(	[Measures].[Internet Sales Amount],
+							[Date].[Calendar Year].[CY 2011]
+							) 
+					,	DESC
+					) ON 1
+		FROM [Adventure Works]
+		WHERE (	[Date].[Calendar Year].[CY 2012])
+		;   
+
+	--	DESC - Order Hierarchiczny
+ 	--------------------------------------------------------------
+		
+		WITH MEMBER [Measures].[MembLevel]
+		AS
+			[Product].[Product Categories].CURRENTMEMBER.LEVEL.ORDINAL
+		SELECT
+			{	[Measures].[Internet Sales Amount],
+				[Measures].[MembLevel]
+				}	 ON 0,
+			ORDER(		[Product].[Product Categories].ALLMEMBERS
+					,	[Measures].[Internet Sales Amount]
+					,	DESC
+					) ON 1
+		FROM [Adventure Works]
+		;    
+
+	--	BDESC - Order Niehierarchiczny (B=BREAK)
+ 	--------------------------------------------------------------
+   
+		WITH MEMBER [Measures].[MembLevel]
+		AS
+			[Product].[Product Categories].CURRENTMEMBER.LEVEL.ORDINAL
+		SELECT
+			{	[Measures].[Internet Sales Amount],
+				[Measures].[MembLevel]
+				}	 ON 0,
+			ORDER(		[Product].[Product Categories].ALLMEMBERS
+					,	[Measures].[Internet Sales Amount]
+					,	BDESC
+					) ON 1
+		FROM [Adventure Works]
+		;    

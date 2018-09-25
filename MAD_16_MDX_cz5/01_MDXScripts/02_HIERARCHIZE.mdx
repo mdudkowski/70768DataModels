@@ -1,0 +1,67 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	HIERARCHIZE
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	The Hierarchize function organizes the members of specified set into hierarchical order. 
+--	The function always retains duplicates.
+
+--	If POST is not specified, the function sorts members in a level in their natural order. 
+--	Their natural order is the default ordering of the members along the hierarchy when no other sort conditions are specified. 
+--	Child members immediately follow their parent members.
+
+--	If POST is specified, the Hierarchize function sorts the members in a level using a post-natural order. 
+--	In other words, child members precede their parents.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT
+	[Measures].[Reseller Sales Amount] on 0,
+	NON EMPTY HIERARCHIZE(		[Date].[Calendar].[Calendar Year].MEMBERS
+							+	[Date].[Calendar].[Month].MEMBERS
+							+	[Date].[Calendar].[Date].MEMBERS
+							,	POST
+							) ON 1
+	FROM [Adventure Works]
+	; 
+
+	WITH MEMBER [Measures].[MemberLevel]
+	AS
+	[Date].[Calendar].CURRENTMEMBER.LEVEL.ORDINAL
+	SELECT
+	{[Measures].[Reseller Sales Amount], [Measures].[MemberLevel]} on 0,
+	NONEMPTY(HIERARCHIZE(		[Date].[Calendar].[Calendar Year].MEMBERS
+							+	[Date].[Calendar].[Month].MEMBERS
+							+	[Date].[Calendar].[Date].MEMBERS
+							)
+				,	[Measures].[Reseller Sales Amount]
+				) ON 1
+	FROM [Adventure Works]
+	; 
+
+-------------------------------------------------------------------------------
+
+	WITH MEMBER [Measures].[MemberLevel]
+	AS
+		[Geography].[Geography].CURRENTMEMBER.LEVEL.ORDINAL
+	SELECT 
+		{[Measures].[Reseller Sales Amount], [Measures].[MemberLevel]} on 0,
+		HIERARCHIZE(	{	[Geography].[Geography].[Country].MEMBERS,
+							[Geography].[Geography].[State-Province].MEMBERS 
+							} ) on 1
+	FROM [Adventure Works]
+	;
+
+	WITH MEMBER [Measures].[MemberLevel]
+	AS
+		[Geography].[Geography].CURRENTMEMBER.LEVEL.ORDINAL
+	SELECT 
+		{[Measures].[Reseller Sales Amount], [Measures].[MemberLevel]} ON 0,
+		HIERARCHIZE(	{	[Geography].[Geography].[Country].MEMBERS,
+							TOPCOUNT(	[Geography].[Geography].[State-Province].MEMBERS,
+										10,
+										[Measures].[Reseller Sales Amount]
+									) 
+						} 
+					) ON 1
+	FROM [Adventure Works]
+	;

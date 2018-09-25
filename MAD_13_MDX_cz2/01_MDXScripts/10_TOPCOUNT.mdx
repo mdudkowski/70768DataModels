@@ -1,0 +1,96 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	TOPCOUNT
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Sorts a set in descending order and returns the specified number of elements with the highest values.
+--	If a numeric expression is specified, the TopCount function sorts, in descending order, 
+--	the tuples in the set specified by the specified set according to the value specified by the numeric expression, 
+--	as evaluated over the specified set.
+--	After sorting the set, the TopCount function then returns the specified number of tuples with the highest value.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	--	wybór TOP 5 bez definiowania kolejnoœci
+	---------------------------------------------------------------------------------------------------------
+
+		SELECT
+			[Measures].[Internet Sales Amount] ON 0,
+			TOPCOUNT(	[Customer].[Customer Geography].[State-Province].ALLMEMBERS,
+						5
+					) ON 1
+		FROM [Adventure Works]
+		;
+
+	--	definiowanie kolejnoœci
+	---------------------------------------------------------------------------------------------------------
+
+		SELECT
+			[Measures].[Internet Sales Amount] ON 0,
+			TOPCOUNT(	[Customer].[Customer Geography].[State-Province].ALLMEMBERS,
+						5,
+						[Measures].[Internet Sales Amount]
+					) ON 1
+		FROM [Adventure Works]
+		;
+
+	--	definiowanie kolejnoœci + WHERE - dzia³a jak w SQL tzn. najpierw WHERE potem ORDER
+	---------------------------------------------------------------------------------------------------------
+
+		SELECT
+			[Measures].[Internet Sales Amount] ON 0,
+			TOPCOUNT(	[Customer].[Customer Geography].[State-Province].ALLMEMBERS,
+						5,
+						[Measures].[Internet Sales Amount]
+					) ON 1
+		FROM [Adventure Works]
+		WHERE ( [Date].[Calendar Year].[CY 2012] )
+		;
+
+	---------------------
+
+	--	definiowanie kolejnoœci + WHERE - dzia³a jak w SQL tzn. najpierw WHERE potem ORDER
+	---------------------------------------------------------------------------------------------------------
+
+		SELECT
+			[Measures].[Internet Sales Amount] ON 0,
+			TOPCOUNT(	[Date].[Date].[Date].ALLMEMBERS,
+						5,
+						[Measures].[Internet Sales Amount]
+					) ON 1
+		FROM [Adventure Works]
+		;
+
+		SELECT
+			[Measures].[Internet Sales Amount] ON 0,
+			TOPCOUNT(	[Date].[Date].[Date].ALLMEMBERS,
+						5,
+						[Measures].[Internet Sales Amount]
+					) ON 1
+		FROM [Adventure Works]
+		WHERE ( [Date].[Calendar Year].[CY 2012] )
+		;
+
+	--	definiowanie kolejnoœci na TUPLI
+	---------------------------------------------------------------------------------------------------------
+
+		SELECT
+			NON EMPTY
+			{ [Date].[Calendar Year].MEMBERS } * [Measures].[Internet Sales Amount] ON 0,
+			TOPCOUNT(	[Customer].[Customer Geography].[State-Province].ALLMEMBERS,
+						5,
+						[Measures].[Internet Sales Amount]
+					) ON 1
+		FROM [Adventure Works]
+		;
+
+		SELECT
+			NON EMPTY
+			{ [Date].[Calendar Year].MEMBERS } * [Measures].[Internet Sales Amount] ON 0,
+			TOPCOUNT(	[Customer].[Customer Geography].[State-Province].ALLMEMBERS,
+						5,
+						(	[Measures].[Internet Sales Amount],
+							[Date].[Calendar Year].[CY 2012]
+							)
+					) ON 1
+		FROM [Adventure Works]
+		;

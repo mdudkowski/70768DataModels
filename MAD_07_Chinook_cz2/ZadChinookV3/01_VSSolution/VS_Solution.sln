@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "ChinookActionKPI", "ChinookActionKPI\ChinookActionKPI.dwproj", "{3746500F-6243-4089-BAEF-F9A5093C44B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3746500F-6243-4089-BAEF-F9A5093C44B5}.Development|Default.ActiveCfg = Development
+		{3746500F-6243-4089-BAEF-F9A5093C44B5}.Development|Default.Build.0 = Development
+		{3746500F-6243-4089-BAEF-F9A5093C44B5}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D11987A-C3BD-4CB9-A104-22EF9F640A95}
+	EndGlobalSection
+EndGlobal

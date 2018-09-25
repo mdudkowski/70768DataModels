@@ -1,0 +1,53 @@
+--------------------------------------------------------------------------------------------------------------------------------
+--	NONEMPTY()
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	definicja
+--	This function returns the tuples in the first specified set that are non-empty when evaluated across the tuples in the second set. 
+--	The NonEmpty function takes into account calculations and preserves duplicate tuples. 
+--	If a second set is not provided, the expression is evaluated in the context of the current coordinates of the members 
+--	of the attribute hierarchies and the measures in the cube.
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	MEMBERS + NON EMPTY
+--------------------------------------------------------------
+
+	SELECT
+					[Measures].[Internet Sales Amount]							ON 0,
+		NON EMPTY	[Customer].[Customer Geography].[State-Province].MEMBERS	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+					[Measures].[Reseller Sales Amount]	ON 0,
+		NON EMPTY	[Date].[Calendar Year].MEMBERS		ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+					[Measures].[Reseller Sales Amount]				ON 0,
+		NON EMPTY	[Date].[Calendar Year].[Calendar Year].MEMBERS	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+					[Measures].[Internet Sales Amount]							ON 0,
+		NON EMPTY	[Customer].[Customer Geography].[State-Province].MEMBERS	ON 1
+	FROM [Adventure Works]
+	;
+
+--	NON EMPTY vs. NONEMPTY()
+--------------------------------------------------------------
+
+	SELECT
+		[Measures].[Internet Sales Amount]							ON 0,
+		[Customer].[Customer Geography].[State-Province].MEMBERS	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+					[Measures].[Internet Sales Amount]							ON 0,
+		NONEMPTY(	[Customer].[Customer Geography].[State-Province].MEMBERS,
+					[Measures].[Internet Sales Amount])							ON 1
+	FROM [Adventure Works]
+	;

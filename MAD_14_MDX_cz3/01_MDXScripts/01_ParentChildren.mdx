@@ -1,0 +1,149 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	Parent
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the parent of a member.
+--------------------------------------------------------------------------------------------------------------------------------
+	
+	SELECT 
+		[Measures].[Internet Sales Amount]						ON 0,
+		[Product].[Product Categories].[Subcategory].[Socks]	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]							ON 0,
+		[Product].[Product Categories].[Subcategory].[Socks].PARENT	ON 1
+	FROM [Adventure Works]		
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]									ON 0,
+		[Product].[Product Categories].[Subcategory].[Socks].PARENT.PARENT	ON 1
+	FROM [Adventure Works]		
+	;
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	Children
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the set of children of a specified member.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT 
+		[Measures].[Internet Sales Amount]						ON 0,
+		[Product].[Product Categories].[Category].[Clothing]	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]								ON 0,
+		[Product].[Product Categories].[Category].[Clothing].CHILDREN	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]										ON 0,
+		[Product].[Product Categories].[Subcategory].[Socks].PARENT.CHILDREN	ON 1
+	FROM [Adventure Works]		
+	;
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	FirstChild
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the first child of a specified member.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT 
+		[Measures].[Internet Sales Amount]								ON 0,
+		[Product].[Product Categories].[Category].[Clothing].CHILDREN	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]								ON 0,
+		[Product].[Product Categories].[Category].[Clothing].FIRSTCHILD	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]											ON 0,
+		[Product].[Product Categories].[Category].[Clothing].FIRSTCHILD.FIRSTCHILD	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]											ON 0,
+		{	[Product].[Product Categories].[Category].[Clothing].FIRSTCHILD.FIRSTCHILD,
+			[Product].[Product Categories].[Category].[Clothing].FIRSTCHILD,
+			[Product].[Product Categories].[Category].[Clothing]
+			}	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]										ON 0,
+		([Product].[Product Categories].[Category].[Clothing].CHILDREN).ITEM(0)	ON 1
+	FROM [Adventure Works]
+	;
+
+--	FirstChild + NON EMPTY vs. NONEMPTY() + ITEM(0)
+--------------------------------------------------------------
+
+	SELECT 
+					[Measures].[Internet Sales Amount]								ON 0,
+		NON EMPTY	[Product].[Product Categories].[Category].[Clothing].FIRSTCHILD	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]										ON 0,
+		NONEMPTY(	[Product].[Product Categories].[Category].[Clothing].CHILDREN,
+					[Measures].[Internet Sales Amount]).ITEM(0)	ON 1
+	FROM [Adventure Works]
+	;
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	LastChild
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the last child of a specified member.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT 
+		[Measures].[Internet Sales Amount]								ON 0,
+		[Product].[Product Categories].[Category].[Clothing].CHILDREN	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]								ON 0,
+		[Product].[Product Categories].[Category].[Clothing].LASTCHILD	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]											ON 0,
+		[Product].[Product Categories].[Category].[Clothing].LASTCHILD.LASTCHILD	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]											ON 0,
+		{	[Product].[Product Categories].[Category].[Clothing].LASTCHILD.LASTCHILD,
+			[Product].[Product Categories].[Category].[Clothing].LASTCHILD,
+			[Product].[Product Categories].[Category].[Clothing]
+			}	ON 1
+	FROM [Adventure Works]
+	;
+
+
+
+
+
+
+
+
+

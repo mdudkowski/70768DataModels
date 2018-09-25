@@ -1,0 +1,33 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	ITEM
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns a member from a specified tuple.
+--	The Item function returns a member from the specified tuple. 
+--	The function returns the member found at the zero-based position specified by Index.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT 
+		[Measures].[Internet Sales Amount]						ON 0,
+		[Product].[Product Categories].[Subcategory].MEMBERS	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]								ON 0,
+		[Product].[Product Categories].[Subcategory].MEMBERS.ITEM(0)	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]								ON 0,
+		[Product].[Product Categories].[Subcategory].MEMBERS.ITEM(1)	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]								ON 0,
+		[Product].[Product Categories].[Subcategory].MEMBERS.ITEM(100)	ON 1
+	FROM [Adventure Works]
+	;

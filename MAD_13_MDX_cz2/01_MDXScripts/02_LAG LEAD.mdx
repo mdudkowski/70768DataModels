@@ -1,0 +1,52 @@
+--------------------------------------------------------------------------------------------------------------------------------
+--	LAG
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the member that is a specified number of positions before a specified member at the member's level.
+
+--	Member positions within a level are determined by the attribute hierarchy's natural order. 
+--	The numbering of the positions is zero-based.
+
+--	If the specified lag is zero, the Lag function returns the specified member itself.
+--	If the specified lag is negative, the Lag function returns a subsequent member
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT
+		[Measures].[Reseller Sales Amount]	ON 0,
+		[Date].[Calendar].[May 2012].Lag(3) ON 1
+	FROM [Adventure Works]
+	; 
+
+	WITH MEMBER [Measures].[Lag3]
+	AS
+		[Date].[Calendar].CurrentMember.Lag(3).Name
+	SELECT
+		{	[Measures].[Reseller Sales Amount],	
+			[Measures].[Lag3] 
+			} on 0,
+		{	[Date].[Calendar].MEMBERS} on 1
+	FROM [Adventure Works]
+	;
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	LEAD
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the member that is a specified number of positions following a specified member along the member's level.
+
+--	Member positions within a level are determined by the attribute hierarchy's natural order. 
+--	The numbering of the positions is zero-based.
+
+--	If the specified lead is zero (0), the Lead function returns the specified member. +
+--	If the specified lead is negative, the Lead function returns a prior member.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	WITH MEMBER [Measures].[Lead3] 
+	AS
+		[Date].[Calendar].CurrentMember.Lead(3).Name
+	SELECT
+		{	[Measures].[Reseller Sales Amount],	
+			[Measures].[Lead3] } on 0,
+		[Date].[Calendar].MEMBERS on 1
+	FROM [Adventure Works]
+	;

@@ -1,0 +1,101 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	RANGE (:)
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Performs a set operation that returns a naturally ordered set, with the two specified members as endpoints, 
+--	and all members between the two specified members included as members of the set.
+--------------------------------------------------------------------------------------------------------------------------------
+
+-- ZAKRES (:)
+----------------------------------------------------------------
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		[Date].[Calendar].[March 2012]:
+		[Date].[Calendar].[May 2013] ON 1
+	FROM [Adventure Works]
+	; 
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		[Date].[Calendar].[Calendar Year].&[2010]:
+		[Date].[Calendar].[Calendar Year].&[2013] ON 1
+	FROM [Adventure Works]
+	; 
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		{	[Product].[Product Categories].[Subcategory].[Socks]:
+			[Product].[Product Categories].[Subcategory].[Chains]
+			} ON 1
+	FROM [Adventure Works]
+	; 
+
+-- ZAKRES (:) bez granicy koñcowej
+----------------------------------------------------------------
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		[Date].[Calendar].[March 2012]:NULL ON 1
+	FROM [Adventure Works]
+	; 
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		[Date].[Calendar].[Calendar Year].&[2010]:NULL ON 1
+	FROM [Adventure Works]
+	; 
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		[Product].[Product Categories].[Subcategory].[Socks]:NULL ON 1
+	FROM [Adventure Works]
+	; 
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		[Product].[Product Categories].[Subcategory].[Headsets]:NULL ON 1
+	FROM [Adventure Works]
+	; 
+
+-- ZESTAW ZAKRESÓW
+----------------------------------------------------------------
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		{		[Date].[Calendar].[Calendar Year].&[2005]:[Date].[Calendar].[Calendar Year].&[2007] 
+			,	[Date].[Calendar].[Calendar Year].&[2010]:[Date].[Calendar].[Calendar Year].&[2013] 
+			}	ON 1
+	FROM [Adventure Works]
+	; 
+
+	--	{+} vs {,} z zakresami
+	----------------------------------------------
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		{		[Date].[Calendar].[Calendar Year].&[2010]:[Date].[Calendar].[Calendar Year].&[2013] 
+			,	[Date].[Calendar].[Calendar Year].&[2010]:[Date].[Calendar].[Calendar Year].&[2013] 
+			}	ON 1
+	FROM [Adventure Works]
+	; 
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		{		[Date].[Calendar].[Calendar Year].&[2010]:[Date].[Calendar].[Calendar Year].&[2013] 
+			+	[Date].[Calendar].[Calendar Year].&[2010]:[Date].[Calendar].[Calendar Year].&[2013] 
+			}	ON 1
+	FROM [Adventure Works]
+	; 
+
+	--	ró¿ne poziomy hierarchii 
+	----------------------------------------------
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		{		[Date].[Calendar].[Calendar Year].&[2010]:[Date].[Calendar].[Calendar Year].&[2013] 
+			,	[Date].[Calendar].[March 2012]:NULL
+			}	ON 1
+	FROM [Adventure Works]
+	; 

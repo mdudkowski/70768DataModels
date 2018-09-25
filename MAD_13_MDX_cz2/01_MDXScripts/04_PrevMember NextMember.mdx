@@ -1,0 +1,86 @@
+--------------------------------------------------------------------------------------------------------------------------------
+--	PrevMember
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the previous member in the level that contains a specified member.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT 
+		[Measures].[Internet Order Quantity]					ON 0,
+		[Date].[Calendar].[Calendar Year].&[2012].PrevMember	ON 1  
+	FROM [Adventure Works]  
+	;
+
+	SELECT 
+		[Measures].[Internet Order Quantity]							ON 0,
+		[Date].[Calendar].[Calendar Semester].[H1 CY 2011].PrevMember	ON 1  
+	FROM [Adventure Works]  
+	;
+
+	SELECT 
+		[Measures].[Internet Order Quantity]						ON 0,
+		[Date].[Calendar].[Calendar Quarter].&[2011]&[2].PrevMember	ON 1  
+	FROM [Adventure Works]  
+	;
+
+	SELECT 
+		[Measures].[Internet Order Quantity]				ON 0,
+		[Date].[Calendar].[Date].&[20110914].PrevMember		ON 1  
+	FROM [Adventure Works]  
+	;
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	NextMember
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	The NextMember function returns the next member, in the same level, that contains the specified member.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT 
+		[Measures].[Internet Order Quantity]					ON 0,
+		[Date].[Calendar].[Calendar Year].&[2010].NextMember	ON 1  
+	FROM [Adventure Works]  
+	;
+
+	SELECT 
+		[Measures].[Internet Order Quantity]							ON 0,
+		[Date].[Calendar].[Calendar Semester].[H1 CY 2011].NextMember	ON 1  
+	FROM [Adventure Works]  
+	;
+
+	SELECT 
+		[Measures].[Internet Order Quantity]						ON 0,
+		[Date].[Calendar].[Calendar Quarter].&[2011]&[2].NextMember	ON 1  
+	FROM [Adventure Works]  
+	;
+
+	SELECT 
+		[Measures].[Internet Order Quantity]				ON 0,
+		[Date].[Calendar].[Date].&[20110914].NextMember		ON 1  
+	FROM [Adventure Works]  
+	;
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+	WITH MEMBER [Measures].[PrvQuant]
+	AS
+	(	[Measures].[Internet Order Quantity],
+		[Date].[Calendar].CURRENTMEMBER.PREVMEMBER
+		)
+	MEMBER [Measures].[DiffQuant]
+	AS
+		[Measures].[Internet Order Quantity] - [Measures].[PrvQuant]
+	MEMBER [Measures].[DiffQuantRatio]
+	AS
+		([Measures].[Internet Order Quantity] - [Measures].[PrvQuant]) / [Measures].[PrvQuant],
+		FORMAT_STRING = "#,##0.00%"
+	SELECT
+		{	[Measures].[Internet Order Quantity],
+			[Measures].[PrvQuant],
+			[Measures].[DiffQuant],
+			[Measures].[DiffQuantRatio]
+			}														ON 0,
+		NON	EMPTY [Date].[Calendar].[Calendar Quarter].MEMBERS		ON 1  
+	FROM [Adventure Works]  
+	;

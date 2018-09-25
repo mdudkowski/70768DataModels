@@ -1,0 +1,53 @@
+--------------------------------------------------------------------------------------------------------------------------------
+--	CROSSJOIN
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the cross product of one or more sets.
+--	The Crossjoin function returns the cross product of two or more specified sets. 
+--	The order of tuples in the resulting set depends on the order of the sets to be joined and the order of their members.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		CROSSJOIN	(
+						[Geography].[Country].MEMBERS
+					,	[Date].[Calendar].[Calendar Year].MEMBERS
+					) ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		CROSSJOIN	(
+						[Geography].[Country].[Country].MEMBERS
+					,	[Date].[Calendar].[Calendar Year].MEMBERS
+					) ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		NON EMPTY CROSSJOIN	(
+								[Geography].[Country].[Country].MEMBERS
+							,	[Date].[Calendar].[Calendar Year].MEMBERS
+							) ON 1
+	FROM [Adventure Works]
+	;
+
+-- CROSSJOIN -> skrócony zapis przy pomocy *
+--------------------------------------------------------------
+
+	SELECT
+		[Measures].[Reseller Sales Amount]				ON 0,
+			[Geography].[Country].[Country].MEMBERS
+		*	[Date].[Calendar].[Calendar Year].MEMBERS	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		[Measures].[Reseller Sales Amount]				ON 0,
+		NON EMPTY 	
+			[Geography].[Country].[Country].MEMBERS
+		*	[Date].[Calendar].[Calendar Year].MEMBERS	ON 1
+	FROM [Adventure Works]
+	;

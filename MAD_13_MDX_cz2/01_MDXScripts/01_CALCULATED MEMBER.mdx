@@ -1,0 +1,239 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	CALCULATED MEMBER (query scoped)
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	In Multidimensional Expressions (MDX), a calculated member is a member that is resolved by calculating an MDX expression 
+--	to return a value. This innocuous definition covers an incredible amount of ground. 
+--	The ability to construct and use calculated members in an MDX query provides a great deal of manipulation capability 
+--	for multidimensional data.
+
+--	You can create calculated members at any point within a hierarchy. 
+--	You can also create calculated members that depend not only on existing members in a cube,
+--	but also on other calculated members defined in the same MDX expression.
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	https://docs.microsoft.com/en-us/sql/analysis-services/multidimensional-models/mdx/mdx-calculated-members-building-calculated-members
+--	https://docs.microsoft.com/en-us/sql/analysis-services/multidimensional-models/mdx/mdx-calculated-members-query-scoped-calculated-members
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	If a calculated member is only required for a single Multidimensional Expressions (MDX) query, 
+--	you can define that calculated member by using the WITH keyword. 
+--	A calculated member that is created by using the WITH keyword no longer exists after the query has finished running.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	--	Chcemy na jednej pozycji mieæ wyœwietlon¹ sumê
+	--			[Product].[Category].[Accessories]
+	--	oraz	[Product].[Category].[Clothing]
+	--------------------------------------------------------------
+
+		SELECT	[Product].[Category].[Accessories] ON 0
+		FROM	[Adventure Works]
+		;
+
+		SELECT	[Product].[Category].[Clothing] ON 0
+		FROM	[Adventure Works]
+		;
+
+		SELECT	[Product].[Category].[Clothing].PARENT ON 0
+		FROM	[Adventure Works]
+		;
+
+		SELECT	{
+					[Product].[Category].[Accessories]
+				,	[Product].[Category].[Clothing]
+				} ON 0
+		FROM	[Adventure Works]
+		;
+
+		WITH MEMBER [Product].[Category].[Acc+Clo]
+		AS		[Product].[Category].[Accessories] +
+				[Product].[Category].[Clothing]
+		SELECT
+			[Product].[Category].[Acc+Clo] ON 0
+		FROM	[Adventure Works]
+		;
+
+		WITH MEMBER [Product].[Category].[All-Clo]
+		AS		[Product].[Category].[Clothing].PARENT -
+				[Product].[Category].[Clothing]
+		SELECT
+			[Product].[Category].[All-Clo] ON 0
+		FROM	[Adventure Works]
+		;
+
+		WITH MEMBER [Product].[Category].[All-Clo]
+		AS		[Product].[Category].[Clothing].PARENT -
+				[Product].[Category].[Clothing]
+		SELECT
+		{	[Measures].[Reseller Sales Amount]
+		,	[Measures].[Reseller Tax Amount]
+		,	[Measures].[Reseller Total Product Cost]
+		}	 ON 0
+		FROM	[Adventure Works]
+		WHERE 
+			[Product].[Category].[All-Clo]
+		;
+
+	--	Je¿eli pe³na œcie¿ka dla nowego MEMBERa nie zostanie podana
+	--	to wyl¹duje w Hierarhii [Measures]
+	--
+	--------------------------------------------------------------
+
+	--	Je¿eli wyl¹duje w [Measures], a nie bêdzie miar¹ ...
+	--	To wyjd¹ bzdury jak poni¿ej
+	--
+	--	tzn. MEMBER jest w hierarchii [Measures], ale zwróci #Error
+	--------------------------------------------------------------
+
+		WITH MEMBER [Kraje] 
+		AS 
+			[Geography].[Country].[Australia] +
+			[Geography].[Country].[Canada],
+			FORMAT_STRING = "Currency"
+		SELECT
+			{	[Measures].[Reseller Sales Amount],
+				[Measures].[Reseller Tax Amount],
+				[Measures].[Reseller Total Product Cost],
+				[Measures].[Kraje]
+			} ON 0,
+			[Geography].[Country].[Country].MEMBERS ON 1
+		FROM [Adventure Works]
+		WHERE ([Date].[Calendar Year].[CY 2012])
+		;
+		
+
+		--------------------------------------------------------------
+
+		WITH MEMBER [Geography].[Country].[Kraje] 
+		AS 
+			[Geography].[Country].[Australia] +
+			[Geography].[Country].[Canada]
+		SELECT
+			{	[Measures].[Reseller Sales Amount],
+				[Measures].[Reseller Tax Amount],
+				[Measures].[Reseller Total Product Cost]
+			} ON 0,
+			[Geography].[Country].[Kraje]  ON 1
+		FROM [Adventure Works]
+		WHERE ([Date].[Calendar Year].[CY 2012])
+		;
+
+		--	Member [Kraje]  dodany do hierarchii [Geography].[Country]
+		--	Ale niewidoczny w [Geography].[Country].MEMBERS
+		--
+		--	Dlaczego?
+		--------------------------------------------------------------
+
+		WITH MEMBER [Geography].[Country].[Kraje] 
+		AS 
+			[Geography].[Country].[Australia] +
+			[Geography].[Country].[Canada]
+		SELECT
+			{	[Measures].[Reseller Sales Amount],
+				[Measures].[Reseller Tax Amount],
+				[Measures].[Reseller Total Product Cost]
+			} ON 0,
+			[Geography].[Country].MEMBERS ON 1
+		FROM [Adventure Works]
+		WHERE ([Date].[Calendar Year].[CY 2012])
+		;
+
+	--	MEMBERS vs. ALLMEMBERS
+	--------------------------------------------------------------
+
+		WITH MEMBER [Geography].[Country].[Kraje] 
+		AS 
+			[Geography].[Country].[Australia] +
+			[Geography].[Country].[Canada]
+		SELECT
+			{	[Measures].[Reseller Sales Amount],
+				[Measures].[Reseller Tax Amount],
+				[Measures].[Reseller Total Product Cost]
+			} ON 0,
+			[Geography].[Country].ALLMEMBERS ON 1
+		FROM [Adventure Works]
+		WHERE ([Date].[Calendar Year].[CY 2012])
+		;
+
+	--	Nie podaliœmy poziomu MEMBERa, gdzie wyl¹dowa³?
+	--
+	--	Na tym samym poziomie co ALL
+	--------------------------------------------------------------
+
+		WITH MEMBER [Geography].[Country].[Kraje] 
+		AS 
+			[Geography].[Country].[Australia] +
+			[Geography].[Country].[Canada]
+		SELECT
+			{	[Measures].[Reseller Sales Amount],
+				[Measures].[Reseller Tax Amount],
+				[Measures].[Reseller Total Product Cost]
+			} ON 0,
+			[Geography].[Country].[(All)].ALLMEMBERS ON 1
+		FROM [Adventure Works]
+		WHERE ([Date].[Calendar Year].[CY 2012])
+		;
+  
+ 
+	--	Podajemy poziom:
+	--	Ma wyl¹dowaæ pod MEMBERem [Geography].[Country].[All Geographies]
+	--	Czyli na poziomie [Country]
+	--------------------------------------------------------------
+       
+		WITH MEMBER [Geography].[Country].[All Geographies].[Kraje]  
+		AS 
+			[Geography].[Country].[Australia] +
+			[Geography].[Country].[Canada]
+		SELECT
+			[Measures].[Reseller Sales Amount]			ON 0
+		,	[Geography].[Country].[Country].ALLMEMBERS	ON 1
+		FROM [Adventure Works]
+		WHERE	(	[Date].[Calendar Year].[CY 2012] 
+					)
+		;    
+
+		WITH MEMBER [Geography].[Country].[All Geographies].[Kraje]  
+		AS 
+			[Geography].[Country].[Australia] +
+			[Geography].[Country].[Canada]
+		SELECT
+			[Measures].[Reseller Sales Amount]			ON 0
+		,	{	[Geography].[Country].[Australia],
+				[Geography].[Country].[Canada],
+				[Geography].[Country].[Kraje]
+				}	ON 1
+		FROM [Adventure Works]
+		WHERE	(	[Date].[Calendar Year].[CY 2012] 
+					)
+		;    
+
+	--	Miary Kalkulowane
+	--------------------------------------------------------------
+
+		WITH MEMBER [Measures].[Sales Amount - Total Product Cost]
+		AS
+				[Measures].[Reseller Sales Amount]
+			-	[Measures].[Reseller Total Product Cost]
+		SELECT
+			{	[Measures].[Reseller Sales Amount],
+				[Measures].[Reseller Total Product Cost],
+				[Measures].[Sales Amount - Total Product Cost]
+			} ON 0,
+			[Geography].[Country].[All Geographies].CHILDREN ON 1
+		FROM [Adventure Works]
+		WHERE ([Date].[Calendar Year].[CY 2012])
+		;
+
+		WITH MEMBER [Measures].[MiaraStala_1]
+		AS
+				1
+		SELECT
+			{	[Measures].[Reseller Sales Amount],
+				[Measures].[Reseller Total Product Cost],
+				[Measures].[MiaraStala_1]
+			} ON 0,
+			[Geography].[Country].[All Geographies].CHILDREN ON 1
+		FROM [Adventure Works]
+		WHERE ([Date].[Calendar Year].[CY 2012])
+		;

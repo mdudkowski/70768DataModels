@@ -1,0 +1,73 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	FILTER
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	The Filter function evaluates the specified logical expression against each tuple in the specified set. 
+--	The function returns a set that consists of each tuple in the specified set where the logical expression evaluates to true. 
+--	If no tuples evaluate to true, an empty set is returned.
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	https://www.codeproject.com/Articles/1007200/Filters-in-MDX-Queries
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT
+		{	[Measures].[Internet Sales Amount],
+			[Measures].[Reseller Sales Amount]
+			} ON 0,
+		NON EMPTY [Product].[Product].MEMBERS ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		{	[Measures].[Internet Sales Amount],
+			[Measures].[Reseller Sales Amount]
+			} ON 0,
+		FILTER(	[Product].[Product].MEMBERS,
+				LEFT([Product].[Product].CURRENTMEMBER.NAME,8) = "AWC Logo"
+				) on 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		{	[Measures].[Internet Sales Amount],
+			[Measures].[Reseller Sales Amount]
+			} ON 0,
+		FILTER(	[Product].[Product].MEMBERS,
+				LEFT([Product].[Product].CURRENTMEMBER.NAME,7) = "Classic"
+				) on 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		{	[Measures].[Internet Sales Amount],
+			[Measures].[Reseller Sales Amount]
+			} ON 0,
+		FILTER(	[Product].[Product].[Product].MEMBERS,
+					LEFT([Product].[Product].CURRENTMEMBER.NAME,7) = "Classic"
+				AND RIGHT([Product].[Product].CURRENTMEMBER.NAME,1) = "M"
+				) on 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		{	[Measures].[Internet Sales Amount],
+			[Measures].[Reseller Sales Amount]
+			} ON 0,
+		FILTER(	[Product].[Product].[Product].MEMBERS,
+					[Measures].[Internet Sales Amount] > 800000
+				AND [Measures].[Reseller Sales Amount] > 800000
+				) on 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		{	[Measures].[Internet Sales Amount],
+			[Measures].[Reseller Sales Amount]
+			} ON 0,
+		FILTER(	[Product].[Product].[Product].MEMBERS,
+					[Measures].[Internet Sales Amount] > 1000000
+				OR [Measures].[Reseller Sales Amount] > 1000000
+				) on 1
+	FROM [Adventure Works]
+	;

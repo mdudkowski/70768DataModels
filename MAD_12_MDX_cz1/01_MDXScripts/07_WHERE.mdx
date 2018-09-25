@@ -1,0 +1,173 @@
+--------------------------------------------------------------------------------------------------------------------------------
+--	WHERE (SLICER) 
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	The slicer axis filters the data returned by the Multidimensional Expressions (MDX) SELECT statement, 
+--	restricting the returned data so that only data intersecting with the specified members will be returned. 
+--	It can be thought of as an invisible extra axis in a query. 
+--	The slicer axis is defined in the WHERE clause of the SELECT statement in MDX.
+
+--	If an attribute in the cube is omitted from the specified <SELECT query axis clause> expressions and the <SELECT slicer axis clause> value, 
+--	the attribute's default member is implicitly added to the slicer axis.
+
+--	The <SELECT slicer axis clause> expression must contain members in dimensions and hierarchies other than those 
+--	referenced in the specified <SELECT query axis clause> expressions.
+
+--------------------------------------------------------------------------------------------------------------------------------
+	
+	--	dane zbiorcze (Australia, Bikes)
+	---------------------------------------------------
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		(		[Geography].[Country].[Australia]
+			,	[Product].[Product Categories].[Category].[Bikes]	
+			)	ON 1
+	FROM [Adventure Works]
+	;
+
+	--	dane roczne (Australia, Bikes)
+	---------------------------------------------------
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		NON EMPTY 
+		(		[Geography].[Country].[Australia]
+			,	[Product].[Product Categories].[Category].[Bikes]	
+			)	*
+			[Date].[Calendar].[Calendar Year].MEMBERS
+			ON 1
+	FROM [Adventure Works]
+	;
+
+	--	przerzucenie roku 2012 do filtra
+	---------------------------------------------------
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		(		[Geography].[Country].[Australia]
+			,	[Product].[Product Categories].[Category].[Bikes]	
+			)	ON 1
+	FROM [Adventure Works]
+	WHERE [Date].[Calendar].[Calendar Year].&[2012]
+	;
+
+	--	zamiana miejscami, ten sam wyik inna prezentacja
+	---------------------------------------------------
+	
+	SELECT
+		[Measures].[Reseller Sales Amount]			ON 0,
+		[Date].[Calendar].[Calendar Year].&[2012]	ON 1
+	FROM [Adventure Works]
+	WHERE (		[Geography].[Country].[Australia]
+			,	[Product].[Product Categories].[Category].[Bikes]	
+			)
+	;
+
+	--	wstawienie zbioru (SET) do slicera
+	--	dane zostaj¹ zagregowane
+	---------------------------------------------------
+	
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		(		[Geography].[Country].[Australia]
+			,	[Product].[Product Categories].[Category].[Bikes]	
+			)	ON 1
+	FROM [Adventure Works]
+	WHERE {	[Date].[Calendar].[Calendar Year].&[2012],
+			[Date].[Calendar].[Calendar Year].&[2013]
+			}
+			
+	;
+
+	--	wstawienie zbioru (SET) do slicera, zbiór z DUBLAMI
+	--	dane zostaj¹ zagregowane
+	--	duble zostaj¹ usuniête
+	---------------------------------------------------
+	
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		(		[Geography].[Country].[Australia]
+			,	[Product].[Product Categories].[Category].[Bikes]	
+			)	ON 1
+	FROM [Adventure Works]
+	WHERE {	[Date].[Calendar].[Calendar Year].&[2012],
+			[Date].[Calendar].[Calendar Year].&[2012]
+			}
+			
+	;
+
+	--	Wybór miary w klauzuli where
+	--------------------------------------------------------------
+
+	SELECT
+		[Geography].[Country].[United Kingdom].SIBLINGS	ON 0,
+		[Product].[Category].[Bikes].SIBLINGS			ON 1
+
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		[Geography].[Country].[United Kingdom].SIBLINGS	ON 0,
+		[Product].[Category].[Bikes].SIBLINGS			ON 1
+
+	FROM [Adventure Works]
+	WHERE [Measures].[Reseller Sales Amount]
+	;
+
+	SELECT
+		[Geography].[Country].[United Kingdom].SIBLINGS	ON 0,
+		[Product].[Category].[Bikes].SIBLINGS			ON 1
+
+	FROM [Adventure Works]
+	WHERE [Measures].[Internet Sales Amount]
+	;
+
+	--	SET kilku miar w klauzuli WHERE
+	--	to nie zadzia³a
+	--	"The set in the WHERE clause cannot contain multiple measures"
+	--------------------------------------------------------------
+
+	SELECT
+		[Geography].[Country].[United Kingdom].SIBLINGS	ON 0,
+		[Product].[Category].[Bikes].SIBLINGS			ON 1
+
+	FROM [Adventure Works]
+	WHERE {	[Measures].[Internet Sales Amount],
+			[Measures].[Reseller Sales Amount]
+			}
+	;
+	--	
+	--------------------------------------------------------------
+
+	SELECT
+		NON EMPTY [Account].[Account Type].[Account Type].MEMBERS	ON 0,
+		NON EMPTY [Organization].[Organizations].MEMBERS			ON 1
+
+	FROM [Adventure Works]
+	WHERE (	[Scenario].[Scenario].[Actual],
+			[Measures].[Amount]
+			)
+	;
+
+	SELECT
+		NON EMPTY [Account].[Account Type].[Account Type].MEMBERS			
+					*	[Date].[Calendar].[Calendar Year].MEMBERS	ON 0,
+		NON EMPTY [Organization].[Organizations].MEMBERS	ON 1
+
+	FROM [Adventure Works]
+	WHERE (	[Scenario].[Scenario].[Actual],
+			[Measures].[Amount]
+			)
+	;
+
+	SELECT
+		NON EMPTY 		[Date].[Calendar].[Calendar Year].MEMBERS			
+					*	[Account].[Account Type].[Account Type].MEMBERS ON 0,
+		NON EMPTY [Organization].[Organizations].MEMBERS	ON 1
+
+	FROM [Adventure Works]
+	WHERE (	[Scenario].[Scenario].[Actual],
+			[Measures].[Amount]
+			)
+	;

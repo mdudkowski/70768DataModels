@@ -1,0 +1,19 @@
+CREATE MEMBER CURRENTCUBE.[Measures].[Inventory On Hand Quantity Avg]
+ AS [Measures].[Inventory On Hand Quantity]/[Measures].[Inventory Row Count], 
+FORMAT_STRING = "#,##;-#,##", 
+VISIBLE = 1 ,  DISPLAY_FOLDER = 'Calculation Members'  ; 
+
+CREATE MEMBER CURRENTCUBE.[Measures].[Inventory On Order Quantity Avg]
+ AS [Measures].[Inventory On Order Quantity]/[Measures].[Inventory Row Count], 
+FORMAT_STRING = "#,##;-#,##", 
+VISIBLE = 1 ,  DISPLAY_FOLDER = 'Calculation Members'  ; 
+
+CREATE MEMBER CURRENTCUBE.[Measures].[Inventory Unit Cost Avg]
+ AS [Measures].[Inventory Unit Cost]/[Measures].[Inventory Row Count], 
+FORMAT_STRING = "$#,##0.00;($#,##0.00)", 
+VISIBLE = 1 ,  DISPLAY_FOLDER = 'Calculation Members'  ; 
+
+CREATE MEMBER CURRENTCUBE.[Measures].[Inventory Safety Stock Quantity Avg]
+ AS [Measures].[Inventory Safety Stock Quantity]/[Measures].[Inventory Row Count], 
+FORMAT_STRING = "#,##;-#,##", 
+VISIBLE = 1 ,  DISPLAY_FOLDER = 'Calculation Members'  ; 

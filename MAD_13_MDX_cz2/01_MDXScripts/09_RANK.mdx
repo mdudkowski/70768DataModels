@@ -1,0 +1,89 @@
+--------------------------------------------------------------------------------------------------------------------------------
+--	RANK
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the one-based rank of a specified tuple in a specified set.
+--	If a numeric expression is specified, the Rank function determines the one-based rank for the specified tuple by 
+--	evaluating the specified numeric expression against the tuple. 
+--	If a numeric expression is specified, the Rank function assigns the same rank to tuples with duplicate values in the set. 
+--	This assignment of the same rank to duplicate values affects the ranks of subsequent tuples in the set.
+
+--	If a numeric expression is not specified, the Rank function returns the one-based ordinal position of the specified tuple.
+
+--	The Rank function does not order the set.
+--------------------------------------------------------------------------------------------------------------------------------
+
+		WITH MEMBER [Measures].[Ranking] 
+		AS
+			RANK(		[Geography].[Geography].CURRENTMEMBER
+					,	[Geography].[Geography].[Country].MEMBERS
+					,	[Measures].[Reseller Sales Amount]
+					)
+		SELECT 
+			{	[Measures].[Reseller Sales Amount],
+				[Measures].[Ranking] } on 0,
+			[Geography].[Geography].Children on 1
+		FROM [Adventure Works]
+		;
+
+	----------------------------------------------------------------
+
+		WITH SET [Kraje] 
+		AS
+			[Geography].[Geography].CHILDREN
+		MEMBER [Measures].[Rank] 
+		AS
+			RANK(	[Geography].[Geography].CURRENTMEMBER,
+					[Kraje],
+					[Measures].[Reseller Sales Amount]
+					)
+		SELECT 
+			{	[Measures].[Reseller Sales Amount],
+				[Measures].[Rank] 
+				} on 0,
+			ORDER(	[Kraje],
+					[Measures].[Rank],
+					ASC) on 1
+		FROM [Adventure Works]
+		; 
+	
+	----------------------------------------------------------------
+
+		WITH SET [Miasta] 
+		AS
+			[Geography].[Geography].[City].MEMBERS
+		MEMBER [Measures].[Rank] 
+		AS
+		RANK(	[Geography].[Geography].CurrentMember,
+				[Miasta],
+				[Measures].[Reseller Sales Amount]
+				)
+		SELECT 
+			{	[Measures].[Reseller Sales Amount],
+				[Measures].[Rank] } on 0,
+			ORDER(	[Miasta],
+					[Measures].[Rank], 
+					BASC) on 1
+		FROM [Adventure Works]
+		; 
+	
+	----------------------------------------------------------------
+
+		WITH SET [Miasta] 
+		AS
+			[Geography].[Geography].[City].MEMBERS
+		MEMBER [Measures].[Rank] 
+		AS
+		RANK(	[Geography].[Geography].CurrentMember,
+				[Miasta],
+				[Measures].[Reseller Sales Amount]
+				)
+		SELECT { [Measures].[Reseller Sales Amount],
+				 [Measures].[Rank] 
+				 } on 0,
+		BOTTOMCOUNT(	[Miasta],
+						10,
+						[Measures].[Rank]
+						) on 1
+		FROM [Adventure Works]
+		;

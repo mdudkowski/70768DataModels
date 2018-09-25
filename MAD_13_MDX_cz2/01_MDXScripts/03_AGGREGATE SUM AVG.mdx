@@ -1,0 +1,101 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	AGGREGATE
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns a number that is calculated by aggregating over the cells returned by the set expression. 
+--	If a numeric expression is not provided, this function aggregates 
+--	each measure within the current query context by using the default aggregation operator 
+--	that is specified for each measure. 
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	If a numeric expression is provided, this function first evaluates, 
+--	and then sums, the numeric expression for each cell in the specified set.
+--------------------------------------------------------------------------------------------------------------------------------
+
+		WITH MEMBER [Measures].[Running Total Agg] 
+		AS
+		AGGREGATE(	[Date].[Calendar].[January 2012]:[Date].[Calendar].CURRENTMEMBER,
+					[Measures].[Customer Count]
+					)
+		SELECT
+			{[Measures].[Customer Count],	[Measures].[Running Total Agg]	}		ON 0,
+			{[Date].[Calendar].[January 2012]:[Date].[Calendar].[December 2012]}	ON 1
+		FROM [Adventure Works]
+		;
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	SUM
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the sum of a numeric expression evaluated over a specified set.
+--------------------------------------------------------------------------------------------------------------------------------
+
+		WITH MEMBER [Measures].[Running Total Agg] 
+		AS
+		SUM(	[Date].[Calendar].[January 2012]:[Date].[Calendar].CURRENTMEMBER,
+				[Measures].[Customer Count]
+				)
+		SELECT
+			{[Measures].[Customer Count],	[Measures].[Running Total Agg]	}		ON 0,
+			{[Date].[Calendar].[January 2012]:[Date].[Calendar].[December 2012]}	ON 1
+		FROM [Adventure Works]
+		;
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	AVG
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Evaluates a set and returns the average of the non empty values of the cells in the set, 
+--	averaged over the measures in the set or over a specified measure.
+--------------------------------------------------------------------------------------------------------------------------------
+
+		WITH MEMBER [Measures].[Running Total Agg] 
+		AS
+		AVG(	[Date].[Calendar].[January 2012]:[Date].[Calendar].CURRENTMEMBER,
+				[Measures].[Customer Count]
+				)
+		SELECT
+			{[Measures].[Customer Count],	[Measures].[Running Total Agg]	}		ON 0,
+			{[Date].[Calendar].[January 2012]:[Date].[Calendar].[December 2012]}	ON 1
+		FROM [Adventure Works]
+		;
+
+	------------------------------------------------------------------------
+
+		WITH MEMBER [Measures].[Moving Average] 
+		AS
+		AVG(	[Date].[Calendar].CURRENTMEMBER.LAG(3):[Date].[Calendar].CURRENTMEMBER,
+				[Measures].[Reseller Sales Amount]
+			)
+		SELECT
+			{	[Measures].[Reseller Sales Amount],[Measures].[Moving Average] }	ON 0
+		,	{	[Date].[Calendar].[January 2012]:[Date].[Calendar].[December 2012]} ON 1
+		FROM [Adventure Works]
+		;
+
+	------------------------------------------------------------------------
+
+		WITH MEMBER [Measures].[Moving Average] 
+		AS
+		AVG(	[Date].[Calendar].CURRENTMEMBER.LAG(3):[Date].[Calendar].CURRENTMEMBER,
+				[Measures].[Reseller Sales Amount]
+			)
+		SELECT
+			{	[Measures].[Reseller Sales Amount],	[Measures].[Moving Average]				}	ON 0
+		,	{	[Date].[Calendar].[Date].&[20121201]:[Date].[Calendar].[Date].&[20121231]	}	ON 1
+		FROM [Adventure Works]
+		;
+
+	------------------------------------------------------------------------
+
+		WITH MEMBER [Measures].[Moving Average] 
+		AS
+		AVG(	[Date].[Calendar].CURRENTMEMBER.LAG(3):[Date].[Calendar].CURRENTMEMBER,
+				[Measures].[Reseller Sales Amount]
+			)
+		SELECT
+					{	[Measures].[Reseller Sales Amount],		[Measures].[Moving Average] } ON 0,
+		NON EMPTY	{	[Date].[Calendar].MEMBERS											} ON 1
+		FROM [Adventure Works]
+		;

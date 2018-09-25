@@ -1,0 +1,62 @@
+  
+--------------------------------------------------------------------------------------------------------------------------------
+--	LastPeriods
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns a set of members up to and including a specified member.
+
+--	If the specified number of periods is positive, 
+--	the LastPeriods function returns a set of members that start with the member that lags 
+--	Index - 1 from the specified member expression, 
+--	and ends with the specified member. The number of members returned by the function is equal to Index.
+
+--	If the specified number of periods is negative, 
+--	the LastPeriods function returns a set of members that start with the specified member and ends 
+--	with the member that leads (- Index - 1) from the specified member. 
+--	The number of members returned by the function is equal to the absolute value of Index.
+--------------------------------------------------------------------------------------------------------------------------------
+
+		SELECT
+			[Measures].[Reseller Sales Amount]				ON 0,
+			LastPeriods(-3,[Date].[Calendar].[May 2013])	ON 1
+		FROM [Adventure Works]
+		; 
+
+		SELECT
+			[Measures].[Reseller Sales Amount]				ON 0,
+			LastPeriods(12,[Date].[Calendar].[May 2012])	ON 1
+		FROM [Adventure Works]
+		; 
+
+	---------------------------------------------------------------------------
+
+		WITH MEMBER [Measures].[Srednia 30 dni] 
+		AS
+			AVG(	LastPeriods(30,[Date].[Calendar].CurrentMember),
+					[Measures].[Reseller Sales Amount]
+					)
+		SELECT
+			{	[Measures].[Reseller Sales Amount], 
+				[Measures].[Srednia 30 dni] 
+				} on 0,
+			[Date].[Calendar].[Date].MEMBERS on 1
+		FROM [Adventure Works]
+		; 
+
+		WITH MEMBER [Measures].[Sprzedaz] 
+		AS
+			CoalesceEmpty([Measures].[Reseller Sales Amount],0)
+		MEMBER [Measures].[Srednia 6M] 
+		AS
+			Avg(	LastPeriods(6,[Date].[Calendar].CurrentMember),
+					[Measures].[Sprzedaz]
+					),
+			format_string = "Currency"
+		SELECT
+			{	[Measures].[Reseller Sales Amount],
+				[Measures].[Srednia 6M] ,
+				[Measures].[Sprzedaz] 
+				} on 0,
+			[Date].[Calendar].[Month].MEMBERS on 1
+		FROM [Adventure Works]
+		; 

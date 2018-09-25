@@ -1,0 +1,261 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	SELECT
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Retrieves data from a specified cube.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT 
+		[Product].[Product]	ON COLUMNS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+		[Product].[Product].MEMBERS	ON COLUMNS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+		[Product].[Product].[Product]	ON COLUMNS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+		[Product].[Product].[Product].MEMBERS	ON COLUMNS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+		[Product].[Product].MEMBERS	ON COLUMNS,
+		{}							ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+		{}							ON COLUMNS,
+		[Product].[Product].MEMBERS	ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]	ON COLUMNS,
+		[Product].[Product].MEMBERS			ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+		[Promotion].[Promotion Type].MEMBERS	ON COLUMNS,
+		[Product].[Product].MEMBERS				ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+		[Promotion].[Promotion Type].MEMBERS	ON COLUMNS,
+		[Product].[Product].MEMBERS				ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+		[Promotion].[Promotion Type].MEMBERS	ON COLUMNS,
+		[Reseller].[Reseller].MEMBERS			ON ROWS
+	FROM
+		[Adventure Works]
+	;
+	
+-- ZAPYTANIE SELECT - pozbycie siê pustych wierszy
+--------------------------------------------------------------	
+
+	SELECT 
+					[Measures].[Internet Sales Amount]		ON COLUMNS,
+		NON EMPTY	[Product].[Product].MEMBERS				ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+					[Promotion].[Promotion Type].MEMBERS	ON COLUMNS,
+		NON EMPTY	[Product].[Product].MEMBERS				ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+					[Promotion].[Promotion Type].MEMBERS	ON COLUMNS,
+		NON EMPTY	[Reseller].[Reseller].MEMBERS			ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+-- ZAPYTANIE SELECT - skrócony zapis COLUMNS/ROWS = 0/1
+--------------------------------------------------------------	
+
+	SELECT 
+					[Measures].[Internet Sales Amount]		ON 0,
+		NON EMPTY	[Product].[Product].MEMBERS				ON 1
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+					[Promotion].[Promotion Type].MEMBERS	ON 0,
+		NON EMPTY	[Product].[Product].MEMBERS				ON 1
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+					[Promotion].[Promotion Type].MEMBERS	ON 0,
+		NON EMPTY	[Reseller].[Reseller].MEMBERS			ON 1
+	FROM
+		[Adventure Works]
+	;
+
+
+-- ZAPYTANIE SELECT - u¿ycie Hierarchii u¿ytkownika
+--------------------------------------------------------------	
+
+	SELECT 
+					[Measures].[Internet Sales Amount]	ON COLUMNS,
+		NON EMPTY	[Product].[Product Model Lines]		ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+					[Measures].[Internet Sales Amount]			ON COLUMNS,
+		NON EMPTY	[Product].[Product Model Lines].MEMBERS		ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+					[Measures].[Internet Sales Amount]						ON COLUMNS,
+		NON EMPTY	[Product].[Product Categories].[Category].MEMBERS		ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+					[Measures].[Internet Sales Amount]						ON COLUMNS,
+		NON EMPTY	[Product].[Product Categories].[Subcategory].MEMBERS	ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+					[Measures].[Internet Sales Amount]					ON COLUMNS,
+		NON EMPTY	[Product].[Product Categories].[Product].MEMBERS	ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+-- ZAPYTANIE SELECT - wybór MEMBERA
+--------------------------------------------------------------	
+	
+	SELECT 
+					[Measures].[Internet Sales Amount]						ON COLUMNS,
+		NON EMPTY	[Product].[Product Categories].[Subcategory].MEMBERS	ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+	--	&[] <---	wybór po kluczu
+	--	[]	<---	wybór po nazwie
+
+	SELECT 
+					[Measures].[Internet Sales Amount]						ON COLUMNS,
+		NON EMPTY	[Product].[Product Categories].[Subcategory].&[30]		ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+					[Measures].[Internet Sales Amount]						ON COLUMNS,
+		NON EMPTY	[Product].[Product Categories].[Subcategory].[Fenders]	ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+-- ZAPYTANIE SELECT - wybór kilku MEMBER'ów z tej samej hierarchii
+--------------------------------------------------------------	
+	
+	SELECT 
+					[Measures].[Internet Sales Amount]							ON COLUMNS,
+		NON EMPTY	{		[Product].[Product Categories].[Subcategory].&[30]
+						,	[Product].[Product Categories].[Subcategory].&[31]
+						,	[Product].[Product Categories].[Subcategory].&[32]
+						}														ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+					[Measures].[Internet Sales Amount]							ON COLUMNS,
+		NON EMPTY	{		[Product].[Product Categories].[Subcategory].[Fenders]
+						,	[Product].[Product Categories].[Subcategory].[Helmets]
+						,	[Product].[Product Categories].[Subcategory].[Hydration Packs]
+						}														ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT 
+					{		[Measures].[Internet Sales Amount]
+						,	[Measures].[Internet Order Count]
+						,	[Measures].[Internet Tax Amount]
+						}							ON COLUMNS,
+		NON EMPTY	{		[Product].[Product Categories].[Subcategory].[Fenders]
+						,	[Product].[Product Categories].[Subcategory].[Helmets]
+						,	[Product].[Product Categories].[Subcategory].[Hydration Packs]
+						}														ON ROWS
+	FROM
+		[Adventure Works]
+	;
+
+-- ZAPYTANIE SELECT - wybór MEMBERA po kluczu z³o¿onym z wielu kolumn
+--------------------------------------------------------------	
+	
+	SELECT
+		[Date].[Calendar].[Calendar Quarter].&[2012]&[1]	ON COLUMNS
+	FROM
+		[Adventure Works]
+	;
+			
+	SELECT
+		{	[Date].[Calendar].[Calendar Quarter].&[2012]&[1]	,
+			[Date].[Calendar].[Calendar Quarter].&[2012]&[2]	,
+			[Date].[Calendar].[Calendar Quarter].&[2012]&[3]	,
+			[Date].[Calendar].[Calendar Quarter].&[2012]&[4]
+		}	ON COLUMNS
+	FROM
+		[Adventure Works]
+	;
+
+	SELECT
+		{	[Date].[Calendar].[Calendar Quarter].[Q1 CY 2012]	,
+			[Date].[Calendar].[Calendar Quarter].[Q2 CY 2012]	,
+			[Date].[Calendar].[Calendar Quarter].[Q3 CY 2012]	,
+			[Date].[Calendar].[Calendar Quarter].[Q4 CY 2012]
+		}	ON COLUMNS
+	FROM
+		[Adventure Works]
+	;
+
+--	ZAPIS AXIS(n)
+--------------------------------------------------------------
+
+	SELECT
+					[Measures].[Internet Sales Amount]							ON AXIS(0),
+		NON EMPTY	[Customer].[Customer Geography].[State-Province].MEMBERS	ON AXIS(1)
+	FROM [Adventure Works]
+	;

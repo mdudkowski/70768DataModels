@@ -1,0 +1,73 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	IsAncestor
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns whether a specified member is an ancestor of another specified member.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	WITH MEMBER [Measures].[IsAncestorOfCY2005] 
+	AS
+	IsAncestor(	[Date].[Calendar].[CY 2005],
+				[Date].[Calendar].CURRENTMEMBER
+				)
+	SELECT
+		[Measures].[IsAncestorOfCY2005]	ON 0,
+		[Date].[Calendar].MEMBERS		ON 1
+	FROM [Adventure Works]
+	;
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	IsSibling
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns whether a specified member is a sibling of another specified member.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	WITH MEMBER [Measures].[IsSiblingOfAug2012] 
+	AS
+		IsSibling(	[Date].[Calendar].[August 2012],	
+					[Date].[Calendar].CURRENTMEMBER
+					)
+	MEMBER [Measures].[Parent] 
+	AS
+		[Date].[Calendar].CURRENTMEMBER.PARENT.Name
+	SELECT
+		{ [Measures].[IsSiblingOfAug2012],[Measures].[Parent] } ON 0,
+			[Date].[Calendar].[Month].&[2012]&[1]:
+			[Date].[Calendar].[Month].&[2012]&[12]				ON 1
+	FROM [Adventure Works]
+	;
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	IsLeaf
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns whether a specified member is a leaf member.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	WITH MEMBER [Measures].[IsLeaf] 
+	AS
+		IsLeaf([Date].[Calendar].CurrentMember)
+	SELECT
+		[Measures].[IsLeaf]			on 0,
+		[Date].[Calendar].MEMBERS	on 1
+	FROM [Adventure Works]
+	;
+
+	WITH MEMBER [Measures].[IsLeaf] 
+	AS
+		IsLeaf([Employee].[Employees].CurrentMember)
+	SELECT
+		[Measures].[IsLeaf]				on 0,
+		[Employee].[Employees].MEMBERS	on 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		[Measures].[Reseller Sales Amount] on 0,
+		FILTER(			[Employee].[Employees].MEMBERS,
+				IsLeaf(	[Employee].[Employees].CurrentMember)
+				) ON 1
+	FROM [Adventure Works]
+	;

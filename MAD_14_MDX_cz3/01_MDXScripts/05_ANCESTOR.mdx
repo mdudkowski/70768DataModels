@@ -1,0 +1,104 @@
+--------------------------------------------------------------------------------------------------------------------------------
+--	Ancestor()
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	A function that returns the ancestor of a specified member at a specified level or at a specified distance from the member.
+--	With the Ancestor function, you provide the function with an MDX member expression and then provide either an MDX expression of a level that is an ancestor of the member or a numeric expression that represents the number of levels above that member. With this information, the Ancestors function returns the ancestor member at that level.
+
+--	If a level expression is specified, the Ancestor function returns the ancestor of specified member at the specified level. 
+--	If the specified member is not within the same hierarchy as specified level, the function returns an error.
+
+--	If a distance is specified, the Ancestor function returns the ancestor of the specified member that is the number of steps 
+--	specified up in the hierarchy specified by the member expression. 
+--	A member may be specified as a member of an attribute hierarchy, a user-defined hierarchy, or in some cases, 
+--	a parent-child hierarchy. A number of 1 returns a member's parent and a number of 2 returns a member's grandparent (if one exists). 
+--	A number of 0 returns the member itself.
+--------------------------------------------------------------------------------------------------------------------------------
+
+		SELECT 
+			[Measures].[Internet Sales Amount]						ON 0,
+			[Product].[Product Categories].[Subcategory].[Socks]	ON 1
+		FROM [Adventure Works]		
+		;
+
+	--	Level syntax  
+	--	Ancestor(Member_Expression, Level_Expression)  
+
+		SELECT 
+			[Measures].[Internet Sales Amount]									ON 0,
+			ANCESTOR(	[Product].[Product Categories].[Subcategory].[Socks], 
+						[Product].[Product Categories].[Category])	ON 1
+		FROM [Adventure Works]		
+		;
+
+		SELECT 
+			[Measures].[Internet Sales Amount]									ON 0,
+			ANCESTOR(	[Product].[Product Categories].[Subcategory].[Socks], 
+						[Product].[Product Categories].[(All)])	ON 1
+		FROM [Adventure Works]		
+		;
+
+	--	Numeric syntax
+	--	Ancestor(Member_Expression, Distance) 
+
+		SELECT 
+			[Measures].[Internet Sales Amount]									ON 0,
+			ANCESTOR([Product].[Product Categories].[Subcategory].[Socks], 1)	ON 1
+		FROM [Adventure Works]		
+		;
+
+		SELECT 
+			[Measures].[Internet Sales Amount]									ON 0,
+			ANCESTOR([Product].[Product Categories].[Subcategory].[Socks], 2)	ON 1
+		FROM [Adventure Works]		
+		;
+
+--	przyk³ady:
+------------------------------------------------------
+	
+	SELECT
+		[Measures].[Reseller Sales Amount] on 0,
+		ANCESTOR(	[Date].[Calendar].[December 10, 2012],
+					[Date].[Calendar].[Calendar Year]
+					)  on 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		[Measures].[Reseller Sales Amount] on 0,
+		ANCESTOR(	[Date].[Calendar].[December 10, 2012],	4)  on 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		[Measures].[Reseller Sales Amount] on 0,
+		{	ANCESTOR(	[Date].[Calendar].[December 10, 2012],	5)	,
+			ANCESTOR(	[Date].[Calendar].[December 10, 2012],	4)	,
+			ANCESTOR(	[Date].[Calendar].[December 10, 2012],	3)	,
+			ANCESTOR(	[Date].[Calendar].[December 10, 2012],	2)	,
+			ANCESTOR(	[Date].[Calendar].[December 10, 2012],	1) 
+		
+			} on 1
+	FROM [Adventure Works]
+	;
+
+	------------------------------------------------------
+
+	WITH MEMBER	[Measures].[Kraj] 
+	AS
+	  ANCESTOR(	[Geography].[Geography].Currentmember,
+				[Geography].[Geography].[Country]
+				).NAME
+	SELECT
+		[Measures].[Kraj]						ON 0,
+		[Geography].[Geography].[City].MEMBERS	ON 1
+	FROM [Adventure Works]
+	;
+
+	WITH MEMBER	[Measures].[Kraj] 
+	AS
+		ANCESTOR(	[Geography].[Geography].Currentmember,2).NAME
+	SELECT
+		[Measures].[Kraj] on 0,
+		[Geography].[Geography].[City].MEMBERS on 1
+	FROM [Adventure Works];

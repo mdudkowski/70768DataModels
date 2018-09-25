@@ -1,0 +1,32 @@
+WITH 
+MEMBER [Measures].[ParallelMth]
+AS
+	(	[Measures].[Amount],
+		ParallelPeriod                               
+		      (	[Date].[YQM].[Year Key], 
+				1,  
+				[Date].[YQM].CURRENTMEMBER   
+		      ) 
+	)
+MEMBER [Measures].[LastYear]
+AS
+	(	[Measures].[Amount],
+		ANCESTOR(	[Date].[YQM].CURRENTMEMBER,
+					[Date].[YQM].[Year Key]
+					).LAG(1)
+	)	
+MEMBER [Measures].[AmountTgtAloc]
+AS
+	[AmountTgt] * ([Measures].[ParallelMth] / [Measures].[LastYear])
+SELECT 
+	{	[Measures].[Amount]
+	,	[Measures].[AmountTgt]
+	,	[Measures].[ParallelMth]
+	,	[Measures].[LastYear]
+	,	[Measures].[AmountTgtAloc]
+		}	ON 0,
+	NONEMPTY(	[Date].[YQM].[Month Key].MEMBERS,
+				[Measures].[AmountTgtAloc]
+				)	ON 1
+
+FROM TestFinance

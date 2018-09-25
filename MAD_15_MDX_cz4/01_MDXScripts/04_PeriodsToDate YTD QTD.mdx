@@ -1,0 +1,93 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	PeriodsToDate
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns a set of sibling members from the same level as a given member, 
+--	starting with the first sibling and ending with the given member, 
+--	as constrained by a specified level in the Time dimension.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT
+	[Measures].[Reseller Sales Amount] ON 0,
+	PeriodsToDate(	[Date].[Calendar].[Calendar Year], 
+					[Date].[Calendar].[Month].[August 2012]
+					) ON 1
+	from [Adventure Works]
+	;
+
+	SELECT
+	[Measures].[Reseller Sales Amount] ON 0,
+	NON EMPTY    PeriodsToDate(	[Date].[Calendar].[Calendar Quarter], 
+								[Date].[Calendar].[Date].[June 27, 2012]
+								) ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+	[Measures].[Reseller Sales Amount] ON 0,
+	PeriodsToDate(	[Geography].[Geography].[Country], 
+					[Geography].[Geography].[Paris]
+					) ON 1
+	FROM [Adventure Works]
+	;
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	YTD
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns a set of sibling members from the same level as a given member, 
+--	starting with the first sibling and ending with the given member, 
+--	as constrained by the Year level in the Time dimension.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		YTD(	[Date].[Calendar].[Date].[June 27, 2012]
+				) ON 1
+	FROM [Adventure Works]
+	;
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	QTD
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns a set of sibling members from the same level as a given member, 
+--	starting with the first sibling and ending with the given member, 
+--	as constrained by the Quarter level in the Time dimension.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT
+		[Measures].[Reseller Sales Amount] ON 0,
+		QTD(	[Date].[Calendar].[Date].[June 27, 2012]
+				) ON 1
+	FROM [Adventure Works]
+	;
+
+--------------------------------------------------------------------------------------------------------------------------------
+-- AGGREGATE/SUM + PTD/YTD/QTD
+--------------------------------------------------------------------------------------------------------------------------------
+
+	WITH MEMBER [Measures].[AggregateYTD] 
+	AS
+		AGGREGATE(	YTD([Date].[Calendar].CurrentMember),
+					[Measures].[Reseller Sales Amount]
+		)
+	SELECT
+		{	[Measures].[Reseller Sales Amount],[Measures].[AggregateYTD]	}	ON 0,
+		{	[Date].[Calendar].[Month].MEMBERS								}	ON 1
+	FROM [Adventure Works]
+	; 
+
+	WITH MEMBER [Measures].[SumPTD] 
+	AS
+		SUM(	PeriodsToDate(	[Date].[Calendar].[Calendar Year],
+								[Date].[Calendar].CurrentMember
+								),
+				[Measures].[Reseller Sales Amount]
+				)
+	SELECT
+					{	[Measures].[Reseller Sales Amount],	[Measures].[SumPTD]	}	ON 0,
+		NON EMPTY	{	[Date].[Calendar].[Month].MEMBERS						}	ON 1
+	FROM [Adventure Works]
+	; 

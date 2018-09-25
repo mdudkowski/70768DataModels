@@ -1,0 +1,87 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	OpeningPeriod
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the first sibling among the descendants of a specified level, optionally at a specified member.
+
+--	If a level expression is specified, the OpeningPeriod function uses the hierarchy that contains the specified level 
+--	and returns the first sibling among the descendants of the default member at the specified level.
+
+--	If both a level expression and a member expression are specified, the OpeningPeriod function returns the first sibling 
+--	among the descendants of specified member at the specified level within the hierarchy containing the specified level.
+
+--	If neither a level expression nor a member expression are specified, the OpeningPeriod function uses the default level
+--	and member of the dimension with a type of Time.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT
+		[Measures].[Internet Sales Amount]			ON 0,
+		OpeningPeriod([Date].[Calendar].[Month])	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		[Measures].[Internet Sales Amount]			ON 0,
+		OpeningPeriod(	[Date].[Calendar].[Month],
+						[Date].[Calendar].[Calendar Year].&[2011]
+						)	ON 1
+	FROM [Adventure Works]
+	;
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	ClosingPeriod
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the member that is the last sibling among the descendants of a specified member at a specified level.
+
+--	If a level expression is specified, the ClosingPeriod function uses the dimension that contains the specified level 
+--	and returns the last sibling among the descendants of the default member at the specified level.
+
+--	If both a level expression and a member expression are specified, the ClosingPeriod function returns the last sibling 
+--	among the descendants of specified member at the specified level.
+
+--	If neither a level expression nor a member expression is specified, the ClosingPeriod function uses the default level 
+--	and member of the dimension (if any) in the cube with a type of Time.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT
+	  [Measures].[Internet Sales Amount] on 0,
+	  ClosingPeriod([Date].[Calendar].[Month]) on 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		[Measures].[Internet Sales Amount] on 0,
+		OpeningPeriod(	[Date].[Calendar].[Month],
+						[Date].[Calendar].[CY 2011]
+						) on 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		[Measures].[Internet Sales Amount] on 0,
+		ClosingPeriod(	[Date].[Calendar].[Date],
+						[Date].[Calendar].[April 2011]
+						) on 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+		[Measures].[Internet Sales Amount] on 0,
+		ClosingPeriod(	[Date].[Calendar].[Date],
+						[Date].[Calendar].[CY 2013]
+						) on 1
+	FROM [Adventure Works]
+	;
+
+	WITH MEMBER [Measures].[KoniecMiesiaca] 
+	AS
+		ClosingPeriod(	[Date].[Calendar].[Date],
+						[Date].[Calendar].CurrentMember
+						).NAME
+	SELECT 
+		[Measures].[KoniecMiesiaca]			ON 0,
+		[Date].[Calendar].[Month].MEMBERS	ON 1
+	FROM [Adventure Works]
+	;

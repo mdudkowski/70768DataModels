@@ -1,0 +1,133 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="2f698877-8bec-4503-9803-125b40bedca4" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>ErrorDBDSV3</ID>
+  <Name>ErrorDBDSV3</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Dimensions>
+    <Dimension dwd:design-time-name="6011271c-fe7e-4be9-bdff-16b835a37c2c">
+      <ID>Dim Test1</ID>
+      <Name>Dim Test1</Name>
+      <DimensionID>Dim Test1</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="2783b795-b1da-48ec-9059-ab135a371990">
+          <AttributeID>Dim1 Key</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="639d08f4-a59d-42e1-94c6-6cf3cebf740e">
+          <AttributeID>Dim1 Attribute Level1</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="e7b20012-0f70-4929-8cde-0edcc62f8cc5">
+          <AttributeID>Dim1 Attribute Level2</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="0ef069dd-b1c4-4c8a-b919-29e016ffb779">
+          <AttributeID>Dim1 Attribute Level3</AttributeID>
+        </Attribute>
+      </Attributes>
+      <Hierarchies>
+        <Hierarchy dwd:design-time-name="fdff31b8-e98a-409e-a24b-e6a0343646f3">
+          <HierarchyID>Hierarchy</HierarchyID>
+        </Hierarchy>
+      </Hierarchies>
+    </Dimension>
+  </Dimensions>
+  <MeasureGroups>
+    <MeasureGroup dwd:design-time-name="e1870839-56dc-4740-8bd3-02605ba36d45">
+      <ID>Fact Test3</ID>
+      <Name>Fact Test3</Name>
+      <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+      <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+      <State>Unprocessed</State>
+      <Measures>
+        <Measure dwd:design-time-name="07bb85f5-0b10-4f0d-aff9-9715674eb9ee">
+          <ID>Fact Value</ID>
+          <Name>Fact Value</Name>
+          <Source dwd:design-time-name="ab471c8d-1aa4-456b-a94d-d7931f0705ed">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="9f00fe5e-2566-41b1-bb85-0274b1f3d5b5">
+              <TableID>dbo_FactTest3</TableID>
+              <ColumnID>FactValue</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="910739bc-e62f-4f24-9286-b896a923cb30">
+          <ID>Fact Test3 Count</ID>
+          <Name>Fact Test3 Count</Name>
+          <AggregateFunction>Count</AggregateFunction>
+          <Source dwd:design-time-name="6ba49713-10ba-478f-9c49-8983daa69eef">
+            <DataType>Integer</DataType>
+            <DataSize>4</DataSize>
+            <Source xsi:type="RowBinding" dwd:design-time-name="cc05803d-2d4f-4530-8fa7-d75b2bf9e99c">
+              <TableID>dbo_FactTest3</TableID>
+            </Source>
+          </Source>
+        </Measure>
+      </Measures>
+      <StorageMode>Molap</StorageMode>
+      <ProcessingMode>Regular</ProcessingMode>
+      <Dimensions>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="a5229d58-e27d-4058-a493-5828d17a42f2">
+          <CubeDimensionID>Dim Test1</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="948b2e54-edb7-428b-970a-2eca7b91867e">
+              <AttributeID>Dim1 Key</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="b5a6681a-58a0-4ab5-bf44-5ee21cead44b">
+                  <DataType>Integer</DataType>
+                  <NullProcessing>UnknownMember</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="57ef9d0e-cba3-46c1-99e8-615adcbe5846">
+                    <TableID>dbo_FactTest3</TableID>
+                    <ColumnID>Dim1Key</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+      </Dimensions>
+      <Partitions />
+    </MeasureGroup>
+  </MeasureGroups>
+  <Source dwd:design-time-name="cf59996a-4b7e-4800-9cdf-5fcf4cb40d64">
+    <DataSourceViewID>ErrorDBDSV</DataSourceViewID>
+  </Source>
+</Cube>

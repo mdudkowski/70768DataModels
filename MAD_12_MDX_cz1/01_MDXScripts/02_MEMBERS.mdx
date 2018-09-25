@@ -1,0 +1,24 @@
+--------------------------------------------------------------------------------------------------------------------------------
+--	MEMBERS
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the set of members in a dimension, level, or hierarchy.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT
+	   [Measures].[Internet Sales Amount]						ON 0,
+	   [Customer].[Customer Geography].[State-Province].MEMBERS	ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+	   [Measures].[Reseller Sales Amount]	ON 0,
+	   [Date].[Calendar Year].MEMBERS		ON 1
+	FROM [Adventure Works]
+	;
+
+	SELECT
+	   [Measures].[Reseller Sales Amount]				ON 0,
+	   [Date].[Calendar Year].[Calendar Year].MEMBERS	ON 1
+	FROM [Adventure Works]
+	;

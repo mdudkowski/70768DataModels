@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "ChinookDenormM2M", "ChinookDenormM2M\ChinookDenormM2M.dwproj", "{A7162C34-3D4B-442B-A59C-249FC2FE75C9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7162C34-3D4B-442B-A59C-249FC2FE75C9}.Development|Default.ActiveCfg = Development
+		{A7162C34-3D4B-442B-A59C-249FC2FE75C9}.Development|Default.Build.0 = Development
+		{A7162C34-3D4B-442B-A59C-249FC2FE75C9}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D11987A-C3BD-4CB9-A104-22EF9F640A95}
+	EndGlobalSection
+EndGlobal

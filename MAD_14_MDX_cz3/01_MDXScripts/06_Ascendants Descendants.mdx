@@ -1,0 +1,264 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	Ascendants
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the set of the ascendants of a specified member, including the member itself.
+--	The Ascendants function returns all of the ancestors of a member from the member itself up to the top of the member’s hierarchy; 
+--	more specifically, it performs a post-order traversal of the hierarchy for the specified member, 
+--	and then returns all ascendant members related to the member, including itself, in a set. 
+
+--	This is in contrast to the Ancestor function, which returns a specific ascendant member, or ancestor, at a specific level.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT 
+		[Measures].[Internet Sales Amount]									ON 0,
+		ASCENDANTS(	[Product].[Product Categories].[Subcategory].[Socks])	ON 1
+	FROM [Adventure Works]		
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]											ON 0,
+		ASCENDANTS([Product].[Product Categories].[Subcategory].[Socks].FIRSTCHILD)	ON 1
+	FROM [Adventure Works]		
+	;
+
+	SELECT
+		[Measures].[Reseller Sales Amount] on 0,
+		ASCENDANTS([Date].[Calendar].[December 10, 2012]) on 1
+	FROM [Adventure Works]
+	;
+
+	WITH MEMBER [Measures].[Lvl]
+	AS 
+	[Product].[Product Categories].CURRENTMEMBER.LEVEL.ORDINAL
+	SELECT 
+		{	[Measures].[Internet Sales Amount],
+			[Measures].[Lvl]
+			}																		ON 0,
+		ASCENDANTS([Product].[Product Categories].[Subcategory].[Socks].FIRSTCHILD)	ON 1
+	FROM [Adventure Works]		
+	;
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	Descendants
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the set of descendants of a member at a specified level or distance, optionally including or excluding descendants in other levels.
+--	If a level is specified, the Descendants function returns a set that contains the descendants of the specified member or the members
+--	of the specified set, at a specified level, optionally modified by a flag specified in Desc_Flag.
+
+--	If Distance is specified, the Descendants function returns a set that contains the descendants of the specified member or the members
+--	of the specified set that are the specified number of levels away in the hierarchy of the specified member, 
+--	optionally modified by a flag specified in Desc_Flag. 
+--	Typically, you use this function with the Distance argument to deal with ragged hierarchies. 
+--	If the specified distance is zero (0), the function returns a set that consists only of the specified member or the specified set.
+
+--	If a set expression is specified, the Descendants function is resolved individually for each member of the set, 
+--	and the set is created again. In other words, the syntax used for the Descendants function is functionally equivalent 
+--	to the MDX Generate function.
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	SELF				-	Returns only descendant members from the specified level or at the specified distance. The function includes the specified member, if the specified level is the level of the specified member.
+--	AFTER				-	Returns descendant members from all levels subordinate to the specified level or distance.
+--	BEFORE				-	Returns descendant members from all levels between the specified member and the specified level, or at the specified distance. It includes the specified member, but does not include members from the specified level or distance.
+--	BEFORE_AND_AFTER	-	Returns descendant members from all levels subordinate to the level of the specified member. It includes the specified member, but does not include members from the specified level or at the specified distance.
+--	SELF_AND_AFTER		-	Returns descendant members from the specified level or at the specified distance and all levels subordinate to the specified level, or at the specified distance.
+--	SELF_AND_BEFORE		-	Returns descendant members from the specified level or at the specified distance, and from all levels between the specified member and the specified level, or at the specified distance, including the specified member.
+--	SELF_BEFORE_AFTER	-	Returns descendant members from all levels subordinate to the level of the specified member, and includes the specified member.
+--	LEAVES				-	Returns leaf descendant members between the specified member and the specified level, or at the specified distance.
+
+	SELECT 
+		[Measures].[Internet Sales Amount]									ON 0,
+		DESCENDANTS([Product].[Product Categories].[Subcategory].[Socks])	ON 1
+	FROM [Adventure Works]		
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]											ON 0,
+		DESCENDANTS([Product].[Product Categories].[Subcategory].[Socks].PARENT)	ON 1
+	FROM [Adventure Works]		
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]													ON 0,
+		NON EMPTY DESCENDANTS([Product].[Product Categories].[Subcategory].[Socks].PARENT)	ON 1
+	FROM [Adventure Works]		
+	;
+
+	WITH MEMBER [Measures].[Lvl]
+	AS 
+		[Product].[Product Categories].CURRENTMEMBER.LEVEL.ORDINAL
+	SELECT 
+		{	[Measures].[Internet Sales Amount]	,
+			[Measures].[Lvl]}																ON 0,
+		NONEMPTY(	DESCENDANTS([Product].[Product Categories].[Subcategory].[Socks].PARENT),
+					[Measures].[Internet Sales Amount])	ON 1
+	FROM [Adventure Works]		
+	;
+
+-- Descendants - zwraca elementy podrzêdne
+------------------------------------------------------
+	
+	WITH MEMBER [Measures].[Lvl]
+	AS 
+		[Date].[Calendar].CURRENTMEMBER.LEVEL.ORDINAL
+	SELECT 
+		{	[Measures].[Internet Sales Amount]	,
+			[Measures].[Lvl]}	ON 0,
+		NONEMPTY(	DESCENDANTS(	[Date].[Calendar].[CY 2012]
+									)
+					,[Measures].[Reseller Sales Amount]
+					) ON 1
+	FROM [Adventure Works]
+	;
+
+	----------------------------------------
+	
+		WITH MEMBER [Measures].[Lvl]
+		AS 
+			[Date].[Calendar].CURRENTMEMBER.LEVEL.ORDINAL
+		SELECT 
+			{	[Measures].[Internet Sales Amount]	,
+				[Measures].[Lvl]}	ON 0,
+			NONEMPTY(	DESCENDANTS(	[Date].[Calendar].[CY 2012],
+										[Date].[Calendar].[Month]
+										)
+						,[Measures].[Reseller Sales Amount]
+						) ON 1
+		FROM [Adventure Works]
+		;
+
+	----------------------------------------
+	
+		WITH MEMBER [Measures].[Lvl]
+		AS 
+			[Date].[Calendar].CURRENTMEMBER.LEVEL.ORDINAL
+		SELECT 
+			{	[Measures].[Internet Sales Amount]	,
+				[Measures].[Lvl]}	ON 0,
+			NONEMPTY(	DESCENDANTS(	[Date].[Calendar].[CY 2012],
+										[Date].[Calendar].[Month],
+										SELF
+										)
+						,[Measures].[Reseller Sales Amount]
+						) ON 1
+		FROM [Adventure Works]
+		;
+
+	----------------------------------------
+	
+		WITH MEMBER [Measures].[Lvl]
+		AS 
+			[Date].[Calendar].CURRENTMEMBER.LEVEL.ORDINAL
+		SELECT 
+			{	[Measures].[Internet Sales Amount]	,
+				[Measures].[Lvl]}	ON 0,
+			NONEMPTY(	DESCENDANTS(	[Date].[Calendar].[CY 2012],
+										[Date].[Calendar].[Month],
+										SELF
+										)
+						,[Measures].[Reseller Sales Amount]
+						) ON 1
+		FROM [Adventure Works]
+		;
+
+	----------------------------------------
+	
+		WITH MEMBER [Measures].[Lvl]
+		AS 
+			[Date].[Calendar].CURRENTMEMBER.LEVEL.ORDINAL
+		SELECT 
+			{	[Measures].[Internet Sales Amount]	,
+				[Measures].[Lvl]}	ON 0,
+			NONEMPTY(	DESCENDANTS(	[Date].[Calendar].[CY 2012],
+										[Date].[Calendar].[Month],
+										LEAVES
+										)
+						,[Measures].[Reseller Sales Amount]
+						) ON 1
+		FROM [Adventure Works]
+		;
+
+	----------------------------------------
+	
+		WITH MEMBER [Measures].[Lvl]
+		AS 
+			[Date].[Calendar].CURRENTMEMBER.LEVEL.ORDINAL
+		SELECT 
+			{	[Measures].[Internet Sales Amount]	,
+				[Measures].[Lvl]}	ON 0,
+			NONEMPTY(	DESCENDANTS(	[Date].[Calendar].[CY 2012],
+										3,
+										SELF
+										)
+						,[Measures].[Reseller Sales Amount]
+						) ON 1
+		FROM [Adventure Works]
+		;
+
+	----------------------------------------
+	
+		WITH MEMBER [Measures].[Lvl]
+		AS 
+			[Date].[Calendar].CURRENTMEMBER.LEVEL.ORDINAL
+		SELECT 
+			{	[Measures].[Internet Sales Amount]	,
+				[Measures].[Lvl]}	ON 0,
+			NONEMPTY(	DESCENDANTS(	[Date].[Calendar].[CY 2012],
+										2,
+										LEAVES
+										)
+						,[Measures].[Reseller Sales Amount]
+						) ON 1
+		FROM [Adventure Works]
+		;
+
+	----------------------------------------
+	
+		WITH MEMBER [Measures].[Lvl]
+		AS 
+			[Employee].[Employees].CURRENTMEMBER.LEVEL.ORDINAL
+		SELECT
+			{	[Measures].[Reseller Sales Amount],
+				[Measures].[Lvl]
+			} on 0,
+			DESCENDANTS(	[Employee].[Employees].Levels(0).Item(0),
+							99,
+							LEAVES
+							) on 1
+		FROM [Adventure Works]
+		;
+
+	----------------------------------------
+
+		SELECT
+			[Measures].[Reseller Sales Amount] on 0,
+			DESCENDANTS(	[Date].[Calendar].[CY 2012],
+							[Date].[Calendar].[Calendar Quarter],
+							SELF_AND_AFTER
+							) on 1
+		FROM [Adventure Works]
+		;
+
+	----------------------------------------
+
+		SELECT
+			[Measures].[Reseller Sales Amount] on 0,
+			DESCENDANTS(	[Date].[Calendar].[CY 2012],
+							[Date].[Calendar].[Calendar Quarter],
+							SELF_AND_BEFORE
+							) on 1
+		FROM [Adventure Works]
+		;
+
+	----------------------------------------
+
+		SELECT
+			[Measures].[Reseller Sales Amount] on 0,
+			DESCENDANTS(	[Date].[Calendar].[CY 2012],
+							[Date].[Calendar].[Calendar Quarter],
+							SELF_BEFORE_AFTER
+							) on 1
+		FROM [Adventure Works]
+		;

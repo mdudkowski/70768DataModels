@@ -1,0 +1,24 @@
+--------------------------------------------------------------------------------------------------------------------------------
+--	Cousin()
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the child member with the same relative position under a parent member as the specified child member.
+--	This function operates on the order and position of members within levels. 
+--	If two hierarchies exist, in which the first one has four levels and the second one has five levels, 
+--	the cousin of the third level of the first hierarchy is the third level of the second hierarchy.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT 
+		[Measures].[Internet Sales Amount]							ON 0,
+		COUSIN(	[Date].[Calendar].[Month].&[2012]&[9],
+				[Date].[Calendar].[Calendar Quarter].&[2013]&[1])	ON 1
+	FROM [Adventure Works]	
+	;
+
+	SELECT 
+		[Measures].[Internet Sales Amount]							ON 0,
+		COUSIN(	[Date].[Calendar].[Month].&[2012]&[9],
+				[Date].[Calendar].[Calendar Year].&[2013]
+				)	ON 1
+	FROM [Adventure Works]	
+	;

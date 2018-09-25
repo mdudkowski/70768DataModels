@@ -1,0 +1,234 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="cf0c821e-0aed-4eab-b742-1e27864d7111" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Dim Test3</ID>
+  <Name>Dim Test3</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="2" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-3102" scrolltop="-6919" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="9975" y="16986" backcolor="16777215" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="DimTest3" left="20" top="0" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="3731" height="3149" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c0000930e00004d0c0000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_DimTest3" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+        </dds>
+      </Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>-3102</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>-6919</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>20</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ARDiagramLayout</Name>
+      <Value>
+        <DiagramLayout ZoomPercent="100" ViewPortX="0" ViewPortY="0" xmlns="">
+          <Shapes NodeWidth="155">
+            <Shape Id="Dim3 Key" Expanded="false">
+              <Attributes>
+                <Attribute Id="Dim3 Key" />
+              </Attributes>
+              <Position x="20" y="20" />
+            </Shape>
+            <Shape Id="Dim3 Attribute Level3" Expanded="false">
+              <Attributes>
+                <Attribute Id="Dim3 Attribute Level3" />
+              </Attributes>
+              <Position x="218" y="20" />
+            </Shape>
+            <Shape Id="Dim3 Attribute Level2" Expanded="false">
+              <Attributes>
+                <Attribute Id="Dim3 Attribute Level2" />
+              </Attributes>
+              <Position x="417" y="20" />
+            </Shape>
+            <Shape Id="Dim3 Attribute Level1" Expanded="false">
+              <Attributes>
+                <Attribute Id="Dim3 Attribute Level1" />
+              </Attributes>
+              <Position x="616" y="20" />
+            </Shape>
+          </Shapes>
+        </DiagramLayout>
+      </Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="4491403a-7be6-47a8-a4bb-4e3f095a0d86">
+    <DataSourceViewID>ErrorDBDSV</DataSourceViewID>
+  </Source>
+  <UnknownMember>Visible</UnknownMember>
+  <ErrorConfiguration dwd:design-time-name="bbca0e2f-7fdc-4fef-98a8-70cd64e04205">
+    <KeyNotFound>ReportAndStop</KeyNotFound>
+    <KeyDuplicate>ReportAndStop</KeyDuplicate>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="adaecd1f-0664-46d6-a5e6-74ddc8ac6204">
+      <ID>Dim3 Key</ID>
+      <Name>Dim3 Key</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="2d16224a-c5a9-45cb-a90d-fcd2f5ffacaa">
+          <NullProcessing>UnknownMember</NullProcessing>
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="f6d117c1-533d-4b7c-96c0-a47f77333411">
+            <TableID>dbo_DimTest3</TableID>
+            <ColumnID>Dim3Key</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="29e1fe8c-d065-4ff2-9506-1e25b241320a">
+        <DataType>WChar</DataType>
+        <DataSize>100</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="6802971b-4867-419c-a275-0feb04084fe9">
+          <TableID>dbo_DimTest3</TableID>
+          <ColumnID>Dim3Name</ColumnID>
+        </Source>
+      </NameColumn>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="3442878d-2752-4892-a74b-5cec60438965">
+          <AttributeID>Dim3 Attribute Level3</AttributeID>
+          <Name>Dim3 Attribute Level3</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="108f022f-2bcb-4480-99d6-fd23bab7d43b">
+      <ID>Dim3 Attribute Level1</ID>
+      <Name>Dim3 Attribute Level1</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="8be96760-0d40-42c6-9977-3eb1be9c0bf5">
+          <DataType>WChar</DataType>
+          <DataSize>100</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="c4ec4228-1283-4616-a06d-39871584978c">
+            <TableID>dbo_DimTest3</TableID>
+            <ColumnID>Dim3AttributeLevel1</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="8fa939b5-895e-44d7-a491-d16065ec46d0">
+      <ID>Dim3 Attribute Level2</ID>
+      <Name>Dim3 Attribute Level2</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="bcc4c457-50d6-4d52-a74f-62e102a65e38">
+          <DataType>WChar</DataType>
+          <DataSize>100</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="def1a8e6-0ab1-4547-a92f-79af2ac50037">
+            <TableID>dbo_DimTest3</TableID>
+            <ColumnID>Dim3AttributeLevel2</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="ca17847e-56bb-4f29-ac31-f4e70a22430e">
+          <AttributeID>Dim3 Attribute Level1</AttributeID>
+          <Name>Dim3 Attribute Level1</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="621fdb9e-0207-49d0-8564-f1c556ef8605">
+      <ID>Dim3 Attribute Level3</ID>
+      <Name>Dim3 Attribute Level3</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="8b5c44ff-3a4b-4171-af05-14ef2399d9b6">
+          <DataType>WChar</DataType>
+          <DataSize>100</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="4127f7c1-d846-4a64-bfeb-ebc24e8517a2">
+            <TableID>dbo_DimTest3</TableID>
+            <ColumnID>Dim3AttributeLevel3</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="d7e18c66-c37d-4b98-acfa-caeab497d16d">
+          <AttributeID>Dim3 Attribute Level2</AttributeID>
+          <Name>Dim3 Attribute Level2</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <Hierarchies>
+    <Hierarchy dwd:design-time-name="c0ed2985-c03e-49b4-b119-c1691698e473">
+      <ID>Hierarchy</ID>
+      <Name>Hierarchy</Name>
+      <Levels>
+        <Level dwd:design-time-name="561d47fd-5b2f-48d1-b71e-3d819331a5dd">
+          <ID>Dim3 Attribute Level1</ID>
+          <Name>Dim3 Attribute Level1</Name>
+          <SourceAttributeID>Dim3 Attribute Level1</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="ee638c63-4488-4948-9566-6ae4a8ba2f8c">
+          <ID>Dim3 Attribute Level2</ID>
+          <Name>Dim3 Attribute Level2</Name>
+          <SourceAttributeID>Dim3 Attribute Level2</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="a8ddbc5c-13c7-4fcd-ac22-2d6c3da579f9">
+          <ID>Dim3 Attribute Level3</ID>
+          <Name>Dim3 Attribute Level3</Name>
+          <SourceAttributeID>Dim3 Attribute Level3</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+  </Hierarchies>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>

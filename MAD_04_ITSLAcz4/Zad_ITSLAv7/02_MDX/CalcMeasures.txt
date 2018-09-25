@@ -1,0 +1,16 @@
+/*
+The CALCULATE command controls the aggregation of leaf cells in the cube.
+If the CALCULATE command is deleted or modified, the data within the cube is affected.
+You should edit this command only if you manually specify how the cube is aggregated.
+*/
+CALCULATE; 
+ 
+CREATE MEMBER CURRENTCUBE.[Measures].[CostAvg]
+ AS [Measures].[Cost Amount] / [Measures].[RowCount], 
+FORMAT_STRING = "#,##0.00", 
+VISIBLE = 1 ,  DISPLAY_FOLDER = 'MiaryKalkulowane' ,  ASSOCIATED_MEASURE_GROUP = 'ITMachine'  ; 
+
+CREATE MEMBER CURRENTCUBE.[Measures].[CostSpread]
+AS [Measures].[Max Cost Amount] - [Measures].[Min Cost Amount], 
+FORMAT_STRING = "#,##0", 
+VISIBLE = 1 ,  DISPLAY_FOLDER = 'MiaryKalkulowane' ,  ASSOCIATED_MEASURE_GROUP = 'ITMachine'  ; 

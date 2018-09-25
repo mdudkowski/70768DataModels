@@ -1,0 +1,22 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	EXCEPT
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Evaluates two sets and removes those tuples in the first set that also exist in the second set, optionally retaining duplicates.
+--	If ALL is specified, the function retains duplicates found in the first set; duplicates found in the second set will still be removed. 
+--	The members are returned in the order they appear in the first set.
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	https://docs.microsoft.com/en-us/sql/mdx/except-mdx-function
+--------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT
+		[Measures].[Reseller Sales Amount] on 0,
+		NON EMPTY	EXCEPT(	[Date].[Calendar].MEMBERS,
+							[Date].[Calendar].[(All)].MEMBERS	+
+							[Date].[Calendar].[Calendar Quarter].MEMBERS	+
+							[Date].[Calendar].[Calendar Semester].MEMBERS						
+							) ON 1
+	FROM [Adventure Works]
+	;        

@@ -1,0 +1,34 @@
+WITH 
+MEMBER [Measures].[AmountTgtAloc]
+AS
+		COUNT(
+		DESCENDANTS(	ANCESTOR(	[Date].[YQM].CURRENTMEMBER,
+									[Date].[YQM].[Year Key]
+									),
+						[Date].[YQM].CURRENTMEMBER.LEVEL
+						)
+		)
+SELECT 
+	{	[Measures].[Amount]
+	,	[Measures].[AmountTgt]
+	,	[Measures].[AmountTgtAloc]
+		}	ON 0,
+	NONEMPTY(	[Date].[YQM].[Month Key].MEMBERS,	--	<-- cahange to Quarter
+				[Measures].[AmountTgtAloc]
+				)	ON 1
+
+FROM TestFinance
+;
+
+WITH MEMBER MEASURES.X
+AS
+IsAncestor( [Date].[YQM].[Year Key].&[2016-01-01T00:00:00],
+             [Date].[YQM].CURRENTMEMBER
+             )
+
+SELECT 
+[Measures].[x] ON 0,
+DESCENDANTS([Date].[YQM].[Year Key],,AFTER)ON 1
+            
+FROM TestFinance
+;

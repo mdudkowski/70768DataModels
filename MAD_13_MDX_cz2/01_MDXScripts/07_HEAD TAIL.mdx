@@ -1,0 +1,165 @@
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	HEAD
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns the first specified number of elements in a set, while retaining duplicates.
+--	The Head function returns the specified number of tuples from the beginning of the specified set. 
+--	The order of elements is preserved. The default value of Count is 1. 
+--	If the specified number of tuples is less than 1, the Head function returns an empty set. 
+--	If the specified number of tuples exceeds the number of tuples in the set, the function returns the original set.
+--------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------
+--	TAIL
+--------------------------------------------------------------------------------------------------------------------------------
+
+--	Returns a subset from the end of a set.
+--	The Tail function returns the specified number of tuples from the end of the specified set. 
+--	The order of elements is preserved. The default value of Count is 1. 
+--	If the specified number of tuples is less than 1, the function returns the empty set. 
+--	If the specified number of tuples exceeds the number of tuples in the set, the function returns the original set.
+--------------------------------------------------------------------------------------------------------------------------------
+
+	--	BEZ ORDERa
+	---------------------
+
+		SELECT
+			[Measures].[Internet Sales Amount] ON 0,
+			HEAD(	[Customer].[Customer Geography].[State-Province].ALLMEMBERS,
+					3
+					) ON 1
+		FROM [Adventure Works]
+		;
+
+		SELECT
+			[Measures].[Internet Sales Amount] ON 0,
+			TAIL(	[Customer].[Customer Geography].[State-Province].ALLMEMBERS,
+					3
+					) ON 1
+		FROM [Adventure Works]
+		;
+
+	--	HEAD/TAIL + ORDER DESC
+	---------------------
+			
+		SELECT
+			[Measures].[Internet Sales Amount] ON 0,
+			HEAD(	
+				ORDER(	[Customer].[Customer Geography].[State-Province].ALLMEMBERS,
+						[Measures].[Internet Sales Amount],
+						DESC
+				),
+				5
+			)
+			ON 1
+		FROM [Adventure Works]
+		;
+
+		SELECT
+			[Measures].[Internet Sales Amount] ON 0,
+			TAIL(	
+				ORDER(	[Customer].[Customer Geography].[State-Province].ALLMEMBERS,
+						[Measures].[Internet Sales Amount],
+						DESC
+				),
+				5
+			)
+			ON 1
+		FROM [Adventure Works]
+		;
+
+	--	Pomimo tego, ¿e mamy tylko LEVEL2
+	--	MEMBERY i tak sortowane s¹ hierarchicznie!
+	---------------------
+
+		SELECT
+			[Measures].[Internet Sales Amount] ON 0,
+				ORDER(	[Customer].[Customer Geography].[State-Province].ALLMEMBERS,
+						[Measures].[Internet Sales Amount],
+						DESC
+						)
+			ON 1
+		FROM [Adventure Works]
+		;
+
+		SELECT
+			[Measures].[Internet Sales Amount] ON 0,
+				ORDER(	[Customer].[Customer Geography].[State-Province].ALLMEMBERS,
+						[Measures].[Internet Sales Amount],
+						BDESC
+						)
+			ON 1
+		FROM [Adventure Works]
+		;
+
+	--	HEAD/TAIL + ORDER DESC + check levels
+	---------------------
+		
+		WITH MEMBER [Measures].[LevelNumber]
+		AS
+			[Customer].[Customer Geography].CURRENTMEMBER.LEVEL.ORDINAL
+		SELECT
+			{	[Measures].[Internet Sales Amount],
+				[Measures].[LevelNumber]} ON 0,
+			HEAD(	
+				ORDER(	[Customer].[Customer Geography].[State-Province].MEMBERS,
+						[Measures].[Internet Sales Amount],
+						DESC
+				),
+				5
+			)
+			ON 1
+		FROM [Adventure Works]
+		;
+
+		SELECT
+			[Measures].[Internet Sales Amount] ON 0,
+			TAIL(	
+				ORDER(	[Customer].[Customer Geography].[State-Province].ALLMEMBERS,
+						[Measures].[Internet Sales Amount],
+						DESC
+				),
+				5
+			)
+			ON 1
+		FROM [Adventure Works]
+		;
+
+
+	--	HEAD/TAIL + ORDER BDESC
+	---------------------
+
+		WITH MEMBER [Measures].[LevelNumber]
+		AS
+			[Customer].[Customer Geography].CURRENTMEMBER.LEVEL.ORDINAL
+		SELECT
+			{	[Measures].[Internet Sales Amount],
+				[Measures].[LevelNumber]} ON 0,
+			HEAD(	
+				ORDER(	[Customer].[Customer Geography].[State-Province].ALLMEMBERS,
+						[Measures].[Internet Sales Amount],
+						BDESC
+				),
+				5
+			)
+			ON 1
+		FROM [Adventure Works]
+		;
+
+		WITH MEMBER [Measures].[LevelNumber]
+		AS
+			[Customer].[Customer Geography].CURRENTMEMBER.LEVEL.ORDINAL
+		SELECT
+			{	[Measures].[Internet Sales Amount],
+				[Measures].[LevelNumber]} ON 0,
+			TAIL(	
+				ORDER(	[Customer].[Customer Geography].[State-Province].ALLMEMBERS,
+						[Measures].[Internet Sales Amount],
+						BDESC
+				),
+				5
+			)
+			ON 1
+		FROM [Adventure Works]
+		;

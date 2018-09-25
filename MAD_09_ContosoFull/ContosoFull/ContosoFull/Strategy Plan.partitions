@@ -1,0 +1,61 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="4eced865-9cc2-4dfe-8579-6f49302073b8" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Strategy Plan</ID>
+  <MeasureGroups>
+    <MeasureGroup>
+      <ID>Fact Strategy Plan</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="ef0b6c82-b9e2-4abc-9780-7bb4ae91e622">
+          <ID>Fact Strategy Plan</ID>
+          <Name>Fact Strategy Plan</Name>
+          <CreatedTimestamp>2009-12-28T06:12:27Z</CreatedTimestamp>
+          <LastSchemaUpdate>2010-01-21T10:38:44Z</LastSchemaUpdate>
+          <LastProcessed>2010-01-21T19:50:19Z</LastProcessed>
+          <State>Processed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="d313f317-e833-48a9-8fe6-71afdf58f4ec">
+            <DataSourceViewID>OPBI</DataSourceViewID>
+            <TableID>dbo_FactStrategyPlan</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <ProactiveCaching dwd:design-time-name="55063b1d-7365-44c7-820e-903cccd35b9a">
+            <SilenceInterval>-PT1S</SilenceInterval>
+            <Latency>-PT1S</Latency>
+            <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+            <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+            <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="bb46d183-9db3-40cf-9998-280de27d30bd" />
+          </ProactiveCaching>
+          <EstimatedSize>23192471</EstimatedSize>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Fact Exchange Rate</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="53c62c25-4940-40dd-912d-581296ad0824">
+          <ID>Fact Exchange Rate</ID>
+          <Name>Fact Exchange Rate</Name>
+          <CreatedTimestamp>2009-12-28T06:12:27Z</CreatedTimestamp>
+          <LastSchemaUpdate>2010-01-21T10:38:44Z</LastSchemaUpdate>
+          <LastProcessed>2010-01-21T19:49:54Z</LastProcessed>
+          <State>Processed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="d75df761-2c6e-4c8e-b770-8ba520fa88d8">
+            <DataSourceViewID>OPBI</DataSourceViewID>
+            <TableID>dbo_FactExchangeRate</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <ProactiveCaching dwd:design-time-name="2356eea7-0293-4322-b8ee-3611a51bc2fa">
+            <SilenceInterval>-PT1S</SilenceInterval>
+            <Latency>-PT1S</Latency>
+            <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+            <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+            <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="23abe2e0-dc5e-4f58-9ba2-13bf8c0b1b7a" />
+          </ProactiveCaching>
+          <EstimatedSize>7982</EstimatedSize>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+  </MeasureGroups>
+</Cube>
