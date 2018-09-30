@@ -1,0 +1,2 @@
+tutorial MSDN:
+https://docs.microsoft.com/en-us/sql/analysis-services/lesson-1-4-modifying-default-table-names?view=sql-server-2014
