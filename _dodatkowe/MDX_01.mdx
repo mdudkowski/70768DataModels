@@ -1,0 +1,161 @@
+
+--	Zadania na bazie ContosoFull
+--	Kostka: IT Machine
+----------------------------------------------------------------------------
+
+--	01	Members
+----------------------------------------------------------------------------
+	
+	--	Zwróciæ wartoœæ miary [IT Machine CostAmount]
+	--	Dla roku kalendarzowego [2008]
+	------------------------------------------------------------------------------------
+
+
+
+	--	Zwróciæ wartoœæ miary [IT Machine CostAmount]
+	--	Dla wszystkich lat (kalendarzowych), ka¿dy rok w osobnym wierszu
+	------------------------------------------------------------------------------------
+
+
+
+	--	Zwróciæ wartoœæ miary [IT Machine CostAmount]
+	--	Dla wszystkich lat (kalendarzowych), ka¿dy rok w osobnym wierszu
+	--	Pozostawiæ jedynie wartoœci niepuste
+	------------------------------------------------------------------------------------
+
+
+
+	--	Zwróciæ wartoœæ miary [IT Machine Down Time]
+	--	Dla przestojów o typie [Asset Management]
+	------------------------------------------------------------------------------------
+
+
+
+	--	Zwróciæ wartoœæ miary [IT Machine Down Time]
+	--	Dla wszystkich przestojów, ka¿dy typ przestoju w osobnym wierszu
+	------------------------------------------------------------------------------------
+
+
+
+	--	Zwróciæ wartoœæ miary [IT Machine Down Number Of Times]
+	--	W podziale na wszystkie elementy hierarchii [Geography Hierarchy]
+	------------------------------------------------------------------------------------
+
+
+
+--	02 Tuple
+----------------------------------------------------------------------------	
+
+	--	Zwróciæ wartoœæ miary [IT Machine Down Time]
+	--	dla roku [2008] oraz typu przestoju [Asset Management]
+	------------------------------------------------------------------------------------
+
+
+
+	--	Zwróciæ wartoœæ miary [IT Machine Down Time]
+	--	dla roku [2008] oraz wszystkich typów przestojów, ka¿dy typ przestoju i rok w osobnym wierszu
+	------------------------------------------------------------------------------------
+
+
+
+	--	Zwróciæ wartoœæ miary [IT Machine Down Time]
+	--	dla wszystkich lat oraz
+	--	wszystkich typów przestojów, ka¿dy typ przestoju i rok w osobnym wierszu
+	------------------------------------------------------------------------------------
+
+
+
+--	03 Set
+----------------------------------------------------------------------------
+
+	--	Zwróciæ wartoœæ miary [IT Machine Down Time] dla:
+		--	typu przestoju [Asset Management]	w roku 2007
+		--	typu przestoju [Backup & Restore]	w roku 2008
+		--	typu przestoju [Change Management]	w roku 2009
+	--	ka¿dy w osobnym wierszu
+	------------------------------------------------------------------------------------
+
+
+
+	--	Zwróciæ wartoœæ miar [IT Machine Down Time] ORAZ [IT Machine Down Number Of Times]:
+		--	typu przestoju [Asset Management]	w roku 2007
+		--	typu przestoju [Backup & Restore]	w roku 2008
+		--	typu przestoju [Change Management]	w roku 2009
+	--	ka¿dy w osobnym wierszu
+	------------------------------------------------------------------------------------
+
+
+
+	--	Zwróciæ wszystkich wartoœæ miar dla:
+		--	typu przestoju [Asset Management]	w roku 2007
+		--	typu przestoju [Backup & Restore]	w roku 2008
+		--	typu przestoju [Change Management]	w roku 2009
+	--	ka¿dy w osobnym wierszu
+	------------------------------------------------------------------------------------
+
+
+
+--	04 WHERE
+----------------------------------------------------------------------------
+
+	--	Zwróciæ wartoœæ miar [IT Machine Down Time] ORAZ [IT Machine Down Number Of Times]:
+	--	typu przestoju [Asset Management]
+	--	typ przestoju w klauzuli WHERE
+	------------------------------------------------------------------------------------
+
+
+
+	--	Zwróciæ wartoœæ miar [IT Machine Down Time] ORAZ [IT Machine Down Number Of Times]:
+	--	typu przestoju [Asset Management]
+	--	typ przestoju w klauzuli WHERE
+	--	dane podzieliæ na lata ([Calendar Year]), ka¿dy rok w osobnym wierszu
+	--	zwróciæ jedynie niepuste wiersze
+	------------------------------------------------------------------------------------
+
+
+	--	Zwróciæ wartoœæ miar [IT Machine Down Time] ORAZ [IT Machine Down Number Of Times]:
+	--	typu przestoju [Asset Management]
+	--	rok 2007
+	--	typ przestoju oraz rok w klauzuli WHERE
+	------------------------------------------------------------------------------------
+
+
+--	05 FILTER
+----------------------------------------------------------------------------
+
+	--	Zwróciæ wartoœæ miar [IT Machine Down Time] ORAZ [IT Machine Down Number Of Times]:
+	--	w podziale na [Machine].[Machine Name]
+	--	jedynie dla [Machine].[Machine Name] zaczynaj¹cego siê ci¹giem znaków "Fabrikam"
+	--	[Machine].[Machine Name] w osobnych wierszach
+	------------------------------------------------------------------------------------
+
+
+	--	Zwróciæ wartoœæ miar [IT Machine Down Time] ORAZ [IT Machine Down Number Of Times]:
+	--	w podziale na [Machine].[Machine Name]
+	--	jedynie dla [Machine].[Machine Name] zaczynaj¹cego siê ci¹giem znaków "Fabrikam"
+	--	[Machine].[Machine Name] w osobnych wierszach
+	--	do wierszy dodaæ [Machine].[Machine Label]
+	--	zwróciæ jedynie wiersze niepuste
+	------------------------------------------------------------------------------------
+
+
+--	06
+----------------------------------------------------------------------------
+
+	--	Wszystkie lata ([Calendar Year]) w kolumnach
+	--	Wszystkie typy przestojów ([Outage Type]) w wierszach
+	--	Miara domyœlna w komórkach
+	----------------------------------------------------------------------------
+
+
+	--	Wszystkie lata ([Calendar Year]) w kolumnach
+	--	Wszystkie typy przestojów ([Outage Type]) w wierszach
+	--	Miara domyœlna w komórkach
+	--	Jedynie niepuste pozycje (na obu osiach)
+	----------------------------------------------------------------------------
+
+
+	--	Wszystkie lata ([Calendar Year]) w kolumnach
+	--	Wszystkie typy przestojów ([Outage Type]) w wierszach
+	--	Miara [IT Machine Down Number Of Times] w komórkach
+	----------------------------------------------------------------------------
