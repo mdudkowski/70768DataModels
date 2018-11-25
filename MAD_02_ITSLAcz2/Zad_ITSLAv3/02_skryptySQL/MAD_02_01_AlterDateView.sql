@@ -18,7 +18,6 @@ AS
     ,   [IsWorkDay]
     FROM
         [dbo].[DimDate]
-	WHERE [CalendarQuarter] = '20051'
 GO
 
 
