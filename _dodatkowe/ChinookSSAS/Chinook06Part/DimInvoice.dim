@@ -1,0 +1,242 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="3ac75124-d73d-49ff-9904-c5dc2dfdbd4a" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>DimInvoice</ID>
+  <Name>DimInvoice</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="7b20b984-e470-4d70-8670-c28e02c3286b">
+    <DataSourceViewID>ChinookDSV</DataSourceViewID>
+  </Source>
+  <ErrorConfiguration dwd:design-time-name="f7524af1-8867-4c50-90a0-b73ef8d40f2d">
+    <KeyNotFound>ReportAndStop</KeyNotFound>
+    <KeyDuplicate>ReportAndStop</KeyDuplicate>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="f267dfa6-ed49-491a-a9ac-2469284d34ac">
+      <ID>Invoice Id</ID>
+      <Name>Invoice Id</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="a00515f8-bd21-4d51-96d1-2a354e1a474a">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="8664f480-20b4-4cac-87b1-07f6261e370d">
+            <TableID>dbo_Invoice</TableID>
+            <ColumnID>InvoiceId</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="501f0644-bbf2-4e04-bd33-56639c064740">
+          <AttributeID>Invoice Date</AttributeID>
+          <Name>Invoice Date</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="d9c26642-d574-4c2d-88aa-5592d5610779">
+          <AttributeID>Billing Address</AttributeID>
+          <Name>Billing Address</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="1746dc19-fedf-441a-945d-46d40d0c0548">
+          <AttributeID>Billing City</AttributeID>
+          <Name>Billing City</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="158d5ae2-3a71-4987-b100-2a30e88a5cb9">
+          <AttributeID>Billing State</AttributeID>
+          <Name>Billing State</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="751534a2-b940-4ad5-9e34-6cdecbfe06d0">
+          <AttributeID>Billing Country</AttributeID>
+          <Name>Billing Country</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="20cf838e-93a7-469a-ba1d-35ad9d7a6760">
+          <AttributeID>Billing Postal Code</AttributeID>
+          <Name>Billing Postal Code</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="8fb3b3b7-87e7-4dfc-b9af-ec1cbf7931b7">
+          <AttributeID>Total</AttributeID>
+          <Name>Total</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="b269b250-2a32-4f3b-9c86-ece03e267a60">
+          <AttributeID>Customer Id</AttributeID>
+          <Name>Customer Id</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="272a816b-ea45-478e-b003-893fbdca567e">
+      <ID>Invoice Date</ID>
+      <Name>Invoice Date</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="d5330855-c019-4a13-9443-57f0596b035a">
+          <DataType>Date</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="3a266d73-6e0f-4dcc-94ea-1b3511a35e54">
+            <TableID>dbo_Invoice</TableID>
+            <ColumnID>InvoiceDate</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="df8a5283-3575-47d3-bed6-a1af5d448baa">
+      <ID>Billing Address</ID>
+      <Name>Billing Address</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="ec3c852a-73b7-466b-a98c-c9ec76d14752">
+          <DataType>WChar</DataType>
+          <DataSize>70</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="c23af23c-3d43-4054-aaee-84dadc0152bd">
+            <TableID>dbo_Invoice</TableID>
+            <ColumnID>BillingAddress</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="7330d6c8-2740-4f14-8dae-2cc672bae128">
+      <ID>Billing City</ID>
+      <Name>Billing City</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="a60b924b-d91c-4472-bbb0-658fe9cc709e">
+          <DataType>WChar</DataType>
+          <DataSize>40</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="f39a8976-a58a-40f1-9a76-30feec6c474c">
+            <TableID>dbo_Invoice</TableID>
+            <ColumnID>BillingCity</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="71ddeb17-8ed7-476e-887b-9e9a913e937c">
+      <ID>Billing State</ID>
+      <Name>Billing State</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="9858991a-007b-4260-9fe7-40dbb7645fb2">
+          <DataType>WChar</DataType>
+          <DataSize>40</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="79f5ef4d-6b2c-4f3d-99fc-89776371b1a8">
+            <TableID>dbo_Invoice</TableID>
+            <ColumnID>BillingState</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="65c80ca8-f504-41ff-bfb8-f42505fa6b06">
+      <ID>Billing Country</ID>
+      <Name>Billing Country</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="b0057c59-dfe3-4b4d-b913-03f5dc72b21c">
+          <DataType>WChar</DataType>
+          <DataSize>40</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="4a92ed6a-b9ce-4ab0-98ec-96dd949d40cb">
+            <TableID>dbo_Invoice</TableID>
+            <ColumnID>BillingCountry</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="7711c57b-e2a0-4468-8b38-2cfa2b155961">
+      <ID>Billing Postal Code</ID>
+      <Name>Billing Postal Code</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="36474e7b-f717-4396-a09b-b0f332be9e8b">
+          <DataType>WChar</DataType>
+          <DataSize>10</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="385dda70-934c-41f3-9c79-2312d9e60709">
+            <TableID>dbo_Invoice</TableID>
+            <ColumnID>BillingPostalCode</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="412811bd-9897-4319-aef3-6641b81d0414">
+      <ID>Total</ID>
+      <Name>Total</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="5f829791-3745-4d6e-b41e-b6cfc036eb4e">
+          <DataType>Double</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="b966d79a-2d3a-4cf5-a2b2-c6e518548d4b">
+            <TableID>dbo_Invoice</TableID>
+            <ColumnID>Total</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="4cd07432-3216-4acd-be60-b46b5936b4dd">
+      <ID>Customer Id</ID>
+      <Name>Customer Id</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="db4b67ac-0b9f-4d99-9cc5-70e0697a7259">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="664660a8-8d3a-4238-b152-491c94024a3f">
+            <TableID>dbo_Invoice</TableID>
+            <ColumnID>CustomerId</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>
