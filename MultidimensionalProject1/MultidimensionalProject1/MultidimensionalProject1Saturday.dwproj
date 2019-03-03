@@ -35,6 +35,18 @@
       <Name>DimStore.dim</Name>
       <FullPath>DimStore.dim</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>DimGeography.dim</Name>
+      <FullPath>DimGeography.dim</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>v Dim Entity.dim</Name>
+      <FullPath>v Dim Entity.dim</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>v Fact IT Machine.dim</Name>
+      <FullPath>v Fact IT Machine.dim</FullPath>
+    </ProjectItem>
   </Dimensions>
   <DataSources>
     <ProjectItem>

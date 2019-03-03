@@ -8,7 +8,7 @@
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
       <Value>
         <dds xmlns="">
-          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="2" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-3936" scrolltop="-8639" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="12012" y="16457" backcolor="16777215" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="2" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-3936" scrolltop="-8639" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="11060" y="16457" backcolor="16777215" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
             <font>
               <ddsxmlobjectstreamwrapper binary="01ee0000900144420100065461686f6d61" />
             </font>
@@ -19,9 +19,9 @@
           <layoutmanager>
             <ddsxmlobj />
           </layoutmanager>
-          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="vDimDate" left="20" top="0" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="4101" height="4419" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="vDimDate" left="20" top="-3625" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="4101" height="8044" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
             <control>
-              <ddsxmlobjectstreaminitwrapper binary="000c00000510000043110000" />
+              <ddsxmlobjectstreaminitwrapper binary="000c0000051000006c1f0000" />
             </control>
             <layoutobject>
               <ddsxmlobj>
@@ -59,11 +59,53 @@
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
-      <Value>0</Value>
+      <Value>-3625</Value>
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
       <Value>100</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ARDiagramLayout</Name>
+      <Value>
+        <DiagramLayout ZoomPercent="100" ViewPortX="0" ViewPortY="0" xmlns="">
+          <Shapes NodeWidth="168">
+            <Shape Id="Datekey" Expanded="false">
+              <Attributes>
+                <Attribute Id="Datekey" />
+                <Attribute Id="Date Description" />
+                <Attribute Id="Full Date Label" />
+                <Attribute Id="Is Work Day" />
+              </Attributes>
+              <Position x="20" y="20" />
+            </Shape>
+            <Shape Id="Calendar Month" Expanded="false">
+              <Attributes>
+                <Attribute Id="Calendar Month" />
+              </Attributes>
+              <Position x="235" y="20" />
+            </Shape>
+            <Shape Id="Calendar Quarter" Expanded="false">
+              <Attributes>
+                <Attribute Id="Calendar Quarter" />
+              </Attributes>
+              <Position x="450" y="20" />
+            </Shape>
+            <Shape Id="Calendar Half Year" Expanded="false">
+              <Attributes>
+                <Attribute Id="Calendar Half Year" />
+              </Attributes>
+              <Position x="665" y="20" />
+            </Shape>
+            <Shape Id="Calendar Year" Expanded="false">
+              <Attributes>
+                <Attribute Id="Calendar Year" />
+              </Attributes>
+              <Position x="880" y="20" />
+            </Shape>
+          </Shapes>
+        </DiagramLayout>
+      </Value>
     </Annotation>
   </Annotations>
   <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
@@ -100,25 +142,13 @@
           <AttributeID>Date Description</AttributeID>
           <Name>Date Description</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="371e0d32-fee4-4b68-a5f4-e2a1807c3ba7">
-          <AttributeID>Calendar Year Label</AttributeID>
-          <Name>Calendar Year Label</Name>
-        </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="804e4e47-7181-43e9-a8a5-7c5d56ddc880">
-          <AttributeID>Calendar Half Year Label</AttributeID>
-          <Name>Calendar Half Year Label</Name>
-        </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="2187371a-d1ec-494d-9e40-0a20d036c0cc">
-          <AttributeID>Calendar Quarter Label</AttributeID>
-          <Name>Calendar Quarter Label</Name>
-        </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="8c010313-c058-44ff-a370-8da627849788">
-          <AttributeID>Calendar Month Label</AttributeID>
-          <Name>Calendar Month Label</Name>
-        </AttributeRelationship>
         <AttributeRelationship dwd:design-time-name="9d1e33de-6d90-4dfe-9e33-964da5d9ccf2">
           <AttributeID>Is Work Day</AttributeID>
           <Name>Is Work Day</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="039fbe21-0c0c-49c1-982d-3f13499aca63">
+          <AttributeID>Calendar Month</AttributeID>
+          <Name>Calendar Month</Name>
         </AttributeRelationship>
       </AttributeRelationships>
       <OrderBy>Key</OrderBy>
@@ -159,74 +189,6 @@
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="f9dc48bb-6f03-4d3f-9158-487efc77ab9d">
-      <ID>Calendar Year Label</ID>
-      <Name>Calendar Year Label</Name>
-      <KeyColumns>
-        <KeyColumn dwd:design-time-name="9fdfdff4-a91c-4559-96e8-06462d8d7226">
-          <DataType>WChar</DataType>
-          <DataSize>20</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="8bca7b31-7578-462b-b227-97ff845f8f6d">
-            <TableID>olap_vDimDate</TableID>
-            <ColumnID>CalendarYearLabel</ColumnID>
-          </Source>
-        </KeyColumn>
-      </KeyColumns>
-      <OrderBy>Key</OrderBy>
-      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
-      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
-    </Attribute>
-    <Attribute dwd:design-time-name="7492c365-03b5-4962-8901-ae8c12ceb5f4">
-      <ID>Calendar Half Year Label</ID>
-      <Name>Calendar Half Year Label</Name>
-      <KeyColumns>
-        <KeyColumn dwd:design-time-name="8d343df9-ebab-4332-b2e4-22d87401497d">
-          <DataType>WChar</DataType>
-          <DataSize>20</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="923ca5de-f0fe-4162-92a4-5b23b1abf819">
-            <TableID>olap_vDimDate</TableID>
-            <ColumnID>CalendarHalfYearLabel</ColumnID>
-          </Source>
-        </KeyColumn>
-      </KeyColumns>
-      <OrderBy>Key</OrderBy>
-      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
-      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
-    </Attribute>
-    <Attribute dwd:design-time-name="85ecc8f7-f0f4-4bf7-8ffb-d8c2199d9c93">
-      <ID>Calendar Quarter Label</ID>
-      <Name>Calendar Quarter Label</Name>
-      <KeyColumns>
-        <KeyColumn dwd:design-time-name="3fd71f75-8aff-4247-b97a-3a4c7db6af89">
-          <DataType>WChar</DataType>
-          <DataSize>20</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="7ddfc72b-c99a-41ef-b89a-d65e75a4d365">
-            <TableID>olap_vDimDate</TableID>
-            <ColumnID>CalendarQuarterLabel</ColumnID>
-          </Source>
-        </KeyColumn>
-      </KeyColumns>
-      <OrderBy>Key</OrderBy>
-      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
-      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
-    </Attribute>
-    <Attribute dwd:design-time-name="c580c0ed-eaa0-43af-8efe-dd30183b7170">
-      <ID>Calendar Month Label</ID>
-      <Name>Calendar Month Label</Name>
-      <KeyColumns>
-        <KeyColumn dwd:design-time-name="1da530f6-0942-4026-9503-3dd972e93382">
-          <DataType>WChar</DataType>
-          <DataSize>20</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="f74a2450-3fa5-40d4-9561-914cf78f1bde">
-            <TableID>olap_vDimDate</TableID>
-            <ColumnID>CalendarMonthLabel</ColumnID>
-          </Source>
-        </KeyColumn>
-      </KeyColumns>
-      <OrderBy>Key</OrderBy>
-      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
-      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
-    </Attribute>
     <Attribute dwd:design-time-name="37328ef0-cf65-4f45-97a5-a14c5454a5f0">
       <ID>Is Work Day</ID>
       <Name>Is Work Day</Name>
@@ -244,31 +206,142 @@
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
+    <Attribute dwd:design-time-name="0703cd80-d729-43f1-8aed-f58ec350a1cb">
+      <ID>Calendar Year</ID>
+      <Name>Calendar Year</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="e8efe21c-1d31-4d11-bd5d-44d91a8e4181">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="d28c6b6e-70d1-4dd7-b5c1-216d865cbeb4">
+            <TableID>olap_vDimDate</TableID>
+            <ColumnID>CalendarYear</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="41a13d3a-9177-445a-a091-bf814952f66c">
+        <DataType>WChar</DataType>
+        <DataSize>20</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="5716c31e-f1f9-4681-8068-4569d382eeba">
+          <TableID>olap_vDimDate</TableID>
+          <ColumnID>CalendarYearLabel</ColumnID>
+        </Source>
+      </NameColumn>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="0c39ceaf-099e-4dcf-b932-9d6af8cb3d56">
+      <ID>Calendar Half Year</ID>
+      <Name>Calendar Half Year</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="ae21cd4f-d5ea-4514-ba5c-111f86326577">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="cbcdc43f-a8ee-4ca2-ac17-00439a2c887a">
+            <TableID>olap_vDimDate</TableID>
+            <ColumnID>CalendarHalfYear</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="0e821d4d-e1c4-4f3f-950f-50d4adb8e131">
+        <DataType>WChar</DataType>
+        <DataSize>20</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="9d534483-71aa-4410-93e1-775aa81defce">
+          <TableID>olap_vDimDate</TableID>
+          <ColumnID>CalendarHalfYearLabel</ColumnID>
+        </Source>
+      </NameColumn>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="46932cb8-87d0-4283-bc62-8906bf8de878">
+          <AttributeID>Calendar Year</AttributeID>
+          <Name>Calendar Year</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="3947c414-3cd3-48b5-a597-e30d0f9a1a7d">
+      <ID>Calendar Quarter</ID>
+      <Name>Calendar Quarter</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="84b9601a-f197-49a2-9021-f32487399564">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="5f909490-1500-4ee8-9cb2-3d1b8d38b1ab">
+            <TableID>olap_vDimDate</TableID>
+            <ColumnID>CalendarQuarter</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="040d7a24-ad5c-463d-8e5a-e5fcfc622797">
+        <DataType>WChar</DataType>
+        <DataSize>20</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="40ccdfc5-4b23-4ef5-ada0-462186c7b512">
+          <TableID>olap_vDimDate</TableID>
+          <ColumnID>CalendarQuarterLabel</ColumnID>
+        </Source>
+      </NameColumn>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="99d83d02-df6b-4ea6-a719-933f3836e2c0">
+          <AttributeID>Calendar Half Year</AttributeID>
+          <Name>Calendar Half Year</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="d8183363-79b1-4ffb-ab89-dabfa9271a86">
+      <ID>Calendar Month</ID>
+      <Name>Calendar Month</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="1db7070b-6795-4c61-854b-1cff3452fb4e">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="29ed8229-3cd3-43fb-9a26-52d70e84437f">
+            <TableID>olap_vDimDate</TableID>
+            <ColumnID>CalendarMonth</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="a7e2dcde-7f99-43fb-aa18-dbc60e303130">
+        <DataType>WChar</DataType>
+        <DataSize>20</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="fa8fe458-c7e6-4c56-8c77-316962506a8f">
+          <TableID>olap_vDimDate</TableID>
+          <ColumnID>CalendarMonthLabel</ColumnID>
+        </Source>
+      </NameColumn>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="344590a0-bd79-4d98-90fe-bf09b1255b53">
+          <AttributeID>Calendar Quarter</AttributeID>
+          <Name>Calendar Quarter</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
   </Attributes>
   <Hierarchies>
-    <Hierarchy dwd:design-time-name="64ee447e-cb59-4a14-83ab-7aa37f849a19">
+    <Hierarchy dwd:design-time-name="6c13b64f-b3f4-484e-8cc8-886eba91f902">
       <ID>Hierarchy</ID>
-      <Name>DateHierarchy(YHQM)</Name>
+      <Name>DAteHierarchy</Name>
       <Levels>
-        <Level dwd:design-time-name="1ce35d8d-c879-4b97-8c00-71e08d832595">
-          <ID>Calendar Year Label</ID>
-          <Name>Calendar Year Label</Name>
-          <SourceAttributeID>Calendar Year Label</SourceAttributeID>
+        <Level dwd:design-time-name="21770589-6cce-4f43-9d14-491f6383856f">
+          <ID>Calendar Year</ID>
+          <Name>Calendar Year</Name>
+          <SourceAttributeID>Calendar Year</SourceAttributeID>
         </Level>
-        <Level dwd:design-time-name="b83f1121-2352-49b9-9783-219090087998">
-          <ID>Calendar Half Year Label</ID>
-          <Name>Calendar Half Year Label</Name>
-          <SourceAttributeID>Calendar Half Year Label</SourceAttributeID>
+        <Level dwd:design-time-name="5290833a-2845-4016-8b7e-c6c4af73afe2">
+          <ID>Calendar Half Year</ID>
+          <Name>Calendar Half Year</Name>
+          <SourceAttributeID>Calendar Half Year</SourceAttributeID>
         </Level>
-        <Level dwd:design-time-name="9b2e41d3-978f-4863-850b-5d1a7b061d86">
-          <ID>Calendar Quarter Label</ID>
-          <Name>Calendar Quarter Label</Name>
-          <SourceAttributeID>Calendar Quarter Label</SourceAttributeID>
+        <Level dwd:design-time-name="3618714f-5f8c-47bb-bbd2-665b9f3829c2">
+          <ID>Calendar Quarter</ID>
+          <Name>Calendar Quarter</Name>
+          <SourceAttributeID>Calendar Quarter</SourceAttributeID>
         </Level>
-        <Level dwd:design-time-name="870d30bc-0911-4f66-817e-6a110199bb8f">
-          <ID>Calendar Month Label</ID>
-          <Name>Calendar Month Label</Name>
-          <SourceAttributeID>Calendar Month Label</SourceAttributeID>
+        <Level dwd:design-time-name="fb3cc764-b5aa-45e4-a219-9bf28ade8cc9">
+          <ID>Calendar Month</ID>
+          <Name>Calendar Month</Name>
+          <SourceAttributeID>Calendar Month</SourceAttributeID>
         </Level>
       </Levels>
     </Hierarchy>

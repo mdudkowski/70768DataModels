@@ -21,5 +21,25 @@
         </Partition>
       </Partitions>
     </MeasureGroup>
+    <MeasureGroup>
+      <ID>v Fact IT Machine</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="33e2fa79-4512-432e-a598-fbd6bd8b6160">
+          <ID>v Fact IT Machine</ID>
+          <Name>v Fact IT Machine</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="92acf813-e68a-4c6a-8ecb-ac3d01d75439">
+            <DataSourceViewID>Contoso Retail DW</DataSourceViewID>
+            <TableID>olap_vFactITMachine</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
   </MeasureGroups>
 </Cube>
